@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Smartprax\Medidoc\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class MedidocCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'medidoc';
 
     public $description = 'My command';
 
