@@ -22,7 +22,7 @@ class MedidocXMLService extends Writer
     private function initNamespacesMap()
     {
         foreach (XML_NS::cases() as $namespace) {
-            $this->namespaceMap[$namespace->value] = $namespace->getName();
+            $this->namespaceMap[$namespace->value] = $namespace->name;
         }
     }
 

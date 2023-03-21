@@ -8,6 +8,7 @@ enum XML_NS : string
     case addressing = 'http://www.w3.org/2005/08/addressing';
     case wss_utility = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd';
     case wss_secext = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd';
+    case sc = 'http://schemas.xmlsoap.org/ws/2005/02/sc';
 
 
     public function node(string $name): string
@@ -15,14 +16,9 @@ enum XML_NS : string
         return '{' . $this->value . '}' . $name;
     }
 
-    public function getName(): string
-    {
-        return \str_replace('_', '-', $this->name);
-    }
-
     public function attribute(string $name): string
     {
-        return $this->getName() . ':' . $name;
+        return $this->name . ':' . $name;
     }
 
 }
