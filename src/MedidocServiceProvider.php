@@ -2,24 +2,24 @@
 
 namespace Smartprax\Medidoc;
 
+use Smartprax\Medidoc\Methods\CheckConnection;
+use Smartprax\Medidoc\Methods\ListFunctions;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Smartprax\Medidoc\Commands\MedidocCommand;
 
 class MedidocServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
             ->name('medidoc')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_medidoc_table')
-            ->hasCommand(MedidocCommand::class);
+            ->hasConfigFile('medidoc')
+            //->hasMigration('create_medidoc_table')
+            ->hasCommands([
+                ListFunctions::class,
+                CheckConnection::class
+            ]);
     }
+
+
 }

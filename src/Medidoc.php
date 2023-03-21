@@ -4,4 +4,5 @@ namespace Smartprax\Medidoc;
 
 class Medidoc
 {
+
 }
