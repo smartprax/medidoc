@@ -9,9 +9,10 @@ enum XML_NS : string
     case wss_utility = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd';
     case wss_secext = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd';
     case sc = 'http://schemas.xmlsoap.org/ws/2005/02/sc';
+    case trust = 'http://schemas.xmlsoap.org/ws/2005/02/trust';
 
 
-    public function node(string $name): string
+    public function clark(string $name): string
     {
         return '{' . $this->value . '}' . $name;
     }

@@ -21,7 +21,7 @@ class ReplyTo extends Node
     public function value(): string|array
     {
         return [
-            'name' => XML_NS::addressing->node('Address'),
+            'name' => XML_NS::addressing->clark('Address'),
             'value' => 'http://www.w3.org/2005/08/addressing/anonymous'
         ];
     }

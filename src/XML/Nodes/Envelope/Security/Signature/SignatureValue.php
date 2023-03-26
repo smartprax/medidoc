@@ -3,12 +3,15 @@
 namespace Smartprax\Medidoc\XML\Nodes\Envelope\Security\Signature;
 
 use Sabre\Xml\Writer;
+use Smartprax\Medidoc\Methods\Method;
 use Smartprax\Medidoc\XML\Nodes\Envelope\Security\Timestamp;
 use Smartprax\Medidoc\XML\Nodes\Node;
 use Smartprax\Medidoc\XML\XML_NS;
 
 class SignatureValue extends Node
 {
+
+    public function __construct(protected Method $method) {}
 
     public function namespace(): ?XML_NS
     {

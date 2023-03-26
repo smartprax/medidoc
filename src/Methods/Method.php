@@ -10,7 +10,15 @@ use Lorisleiva\Actions\Concerns\AsAction;
 use Lorisleiva\Actions\Concerns\AsCommand;
 use Ramsey\Uuid\Uuid;
 use Sabre\Xml\XmlSerializable;
-use Smartprax\Medidoc\XML\MedidocXMLService;
+use Smartprax\Medidoc\XML\MedidocXML;
+use Smartprax\Medidoc\XML\Nodes\Body;
+use Smartprax\Medidoc\XML\Nodes\Envelope\Action;
+use Smartprax\Medidoc\XML\Nodes\Envelope\LoginSecurity;
+use Smartprax\Medidoc\XML\Nodes\Envelope\MessageID;
+use Smartprax\Medidoc\XML\Nodes\Envelope\ReplyTo;
+use Smartprax\Medidoc\XML\Nodes\Envelope\Security;
+use Smartprax\Medidoc\XML\Nodes\Envelope\To;
+use Smartprax\Medidoc\XML\Nodes\Header;
 
 abstract class Method implements XmlSerializable
 {
@@ -68,27 +76,37 @@ abstract class Method implements XmlSerializable
         return CarbonImmutable::now('GMT');
     }
 
-    public function call()
-    {
-        $this->handle();
-    }
-
     public function handle() : string
     {
-        $this->login();
 
-        return MedidocXMLService::make($this)->prettyPrint();
+        return $this->login();
+
+        //return $this->call();
     }
 
-    public function login()
+    public function login() : string
     {
-        $login_xml = MedidocXMLService::make($this)->write([
-
-        ]);
+        return MedidocXML::write(
+            Header::create()
+                ->addChild(new Action($this))
+                ->addChild(new MessageID())
+                ->addChild(new ReplyTo())
+                ->addChild(new To())
+                ->addChild(new LoginSecurity($this)),
+            new Body($this));
     }
 
-
-
+    public function call() : string
+    {
+        return MedidocXML::write(
+            Header::create()
+                ->addChild(new Action($this))
+                ->addChild(new MessageID())
+                ->addChild(new ReplyTo())
+                ->addChild(new To())
+                ->addChild(new Security($this)),
+            new Body($this));
+    }
 
     public function getCommandSignature() :string
     {

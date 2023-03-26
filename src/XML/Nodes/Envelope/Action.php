@@ -8,6 +8,8 @@ use Smartprax\Medidoc\XML\XML_NS;
 class Action extends \Smartprax\Medidoc\XML\Nodes\Node
 {
 
+    public function __construct(protected Method $method) {}
+
     public function namespace(): ?XML_NS
     {
         return XML_NS::addressing;

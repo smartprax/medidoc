@@ -2,11 +2,14 @@
 
 namespace Smartprax\Medidoc\XML\Nodes\Envelope\Security;
 
+use Smartprax\Medidoc\Methods\Method;
 use Smartprax\Medidoc\XML\Nodes\Node;
 use Smartprax\Medidoc\XML\XML_NS;
 
 class Timestamp extends Node
 {
+
+    public function __construct(protected Method $method) {}
 
     public function namespace(): ?XML_NS
     {
@@ -24,12 +27,12 @@ class Timestamp extends Node
     {
         return [
             [
-                'name' => XML_NS::wss_utility->node('Created'),
+                'name' => XML_NS::wss_utility->clark('Created'),
                 'value' => $this->created(),
             ],
 
             [
-                'name' => XML_NS::wss_utility->node('Expires'),
+                'name' => XML_NS::wss_utility->clark('Expires'),
                 'value' => $this->method->timestamp()->addSeconds(50)->toIso8601ZuluString(),
             ]
 

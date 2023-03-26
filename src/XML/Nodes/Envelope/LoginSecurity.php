@@ -3,12 +3,12 @@
 namespace Smartprax\Medidoc\XML\Nodes\Envelope;
 
 use Smartprax\Medidoc\Methods\Method;
-use Smartprax\Medidoc\XML\Nodes\Envelope\Security\SecurityContextToken;
 use Smartprax\Medidoc\XML\Nodes\Envelope\Security\Timestamp;
+use Smartprax\Medidoc\XML\Nodes\Envelope\Security\UsernameToken;
 use Smartprax\Medidoc\XML\Nodes\Node;
 use Smartprax\Medidoc\XML\XML_NS;
 
-class Security extends Node
+class LoginSecurity extends Node
 {
 
     public function __construct(protected Method $method) {}
@@ -29,7 +29,7 @@ class Security extends Node
     {
         return [
             new Timestamp($this->method),
-            new SecurityContextToken($this->method),
+            new UsernameToken(),
         ];
     }
 }
