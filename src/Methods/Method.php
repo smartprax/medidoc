@@ -2,18 +2,17 @@
 
 namespace Smartprax\Medidoc\Methods;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Lorisleiva\Actions\Concerns\AsCommand;
+use Ramsey\Uuid\Uuid;
 use Sabre\Xml\XmlSerializable;
-use Smartprax\Medidoc\XML\Nodes\Body;
-use Smartprax\Medidoc\XML\Nodes\Envelope;
-use Smartprax\Medidoc\XML\XML_NS;
 use Smartprax\Medidoc\XML\MedidocXMLService;
 
-abstract class AbstractMethod implements XmlSerializable
+abstract class Method implements XmlSerializable
 {
     use AsAction,
         AsCommand;
@@ -54,6 +53,21 @@ abstract class AbstractMethod implements XmlSerializable
             ->basename();
     }
 
+    public function uuid() : string
+    {
+        return Uuid::uuid4();
+    }
+
+    public function timestamp() : CarbonImmutable
+    {
+        return CarbonImmutable::now('GMT');
+    }
+
+    public function messageId() : string
+    {
+        return CarbonImmutable::now('GMT');
+    }
+
     public function call()
     {
         $this->handle();
@@ -61,8 +75,20 @@ abstract class AbstractMethod implements XmlSerializable
 
     public function handle() : string
     {
-        return MedidocXMLService::forMethod($this)->prettyPrint();
+        $this->login();
+
+        return MedidocXMLService::make($this)->prettyPrint();
     }
+
+    public function login()
+    {
+        $login_xml = MedidocXMLService::make($this)->write([
+
+        ]);
+    }
+
+
+
 
     public function getCommandSignature() :string
     {

@@ -4,7 +4,7 @@ namespace Smartprax\Medidoc\Methods;
 
 use Sabre\Xml\Writer;
 
-class CheckConnection extends AbstractMethod
+class CheckConnection extends Method
 {
 
     public function xmlSerialize(Writer $writer): void

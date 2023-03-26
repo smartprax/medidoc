@@ -2,14 +2,11 @@
 
 namespace Smartprax\Medidoc\XML\Nodes\Envelope;
 
-use Smartprax\Medidoc\Methods\AbstractMethod;
+use Smartprax\Medidoc\Methods\Method;
 use Smartprax\Medidoc\XML\XML_NS;
 
 class Action extends \Smartprax\Medidoc\XML\Nodes\Node
 {
-
-    public function __construct(private AbstractMethod $method)
-    {}
 
     public function namespace(): ?XML_NS
     {

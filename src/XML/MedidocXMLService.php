@@ -3,7 +3,7 @@
 namespace Smartprax\Medidoc\XML;
 
 use Sabre\Xml\Writer;
-use Smartprax\Medidoc\Methods\AbstractMethod;
+use Smartprax\Medidoc\Methods\Method;
 use Smartprax\Medidoc\XML\Nodes\Body;
 use Smartprax\Medidoc\XML\Nodes\Envelope;
 
@@ -26,7 +26,7 @@ class MedidocXMLService extends Writer
         }
     }
 
-    public static function forMethod(AbstractMethod $method) : self
+    public static function make(Method $method) : self
     {
         $instance = new self();
 
@@ -37,6 +37,7 @@ class MedidocXMLService extends Writer
 
         return $instance;
     }
+
 
     public function prettyPrint() : string
     {
