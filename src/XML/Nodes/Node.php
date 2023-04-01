@@ -6,11 +6,12 @@ use Illuminate\Support\Str;
 use ReflectionClass;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
+use Smartprax\Medidoc\XML\MedidocXML;
 use Smartprax\Medidoc\XML\XML_NS;
 
 class Node implements XmlSerializable
 {
-    protected null|string|array $value = null;
+    protected null|string|array|Node $value = null;
     protected array $attributes = [];
     protected array $children = [];
 
@@ -26,7 +27,7 @@ class Node implements XmlSerializable
         $reflection = new ReflectionClass(static::class);
         $params = $reflection->getConstructor()?->getParameters() ?? [];
 
-        // Pass the parameters to the (child) class constructor.
+        // Pass the unpacked parameters to the (child) class constructor.
         $instance = new static(...\array_slice($args, 0, \count($params)));
 
         // Set props if passed by name.
@@ -37,16 +38,17 @@ class Node implements XmlSerializable
         return $instance;
     }
 
-    public function namespace() : ?XML_NS
+    public static function namespace() : ?XML_NS
     {
         return null;
     }
 
     public function name() : string
     {
-        return $this->name ?? Str::of(get_class($this))
-            ->replace('\\', '/')
-            ->basename();
+        return $this->name ??
+            Str::of(get_class($this))
+                ->replace('\\', '/')
+                ->basename();
     }
 
     public function value(): array|string|null
@@ -68,25 +70,38 @@ class Node implements XmlSerializable
 
     public function xmlSerialize(Writer $writer): void
     {
+        $name = $this->name();
+        $namespace = $this->namespace();
+        $value = $this->value();
+
         $writer->write([
-            'name' => $this->namespace() ? $this->namespace()->clark($this->name()) : $this->name(),
+            'name' => $namespace ? $namespace->clark($name) : $name,
             'attributes' => $this->attributes(),
-            'value' => match (true) {
-                \is_array($this->value()) => \array_filter([
-                    ...$this->value(),
+            'value' => \is_array($value) ?
+                \array_filter([
+                    ...$value,
                     ...$this->children,
-                ]),
-                default => $this->value(),
-            },
+                ]) :
+                $value,
         ]);
     }
 
-    public function __toString(): string
+    public function xml(): string
     {
-        $writer = new Writer();
+        $writer = MedidocXML::writer();
+
+        if (static::namespace()) {
+            $writer->namespaceMap[static::namespace()->value] = static::namespace()->name;
+        }
+
         $writer->write($this);
 
         return $writer->outputMemory();
+    }
+
+    public function __toString()
+    {
+        return $this->xml();
     }
 
 }
