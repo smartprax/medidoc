@@ -2,24 +2,24 @@
 
 namespace Smartprax\Medidoc\XML\Nodes\Envelope\Security;
 
-use Ramsey\Uuid\Uuid;
+use Smartprax\Medidoc\Methods\Login;
 use Smartprax\Medidoc\Methods\Method;
 use Smartprax\Medidoc\XML\XML_NS;
 
 class SecurityContextToken extends \Smartprax\Medidoc\XML\Nodes\Node
 {
 
-    public function __construct(protected Method $method) {}
+    public function __construct(private readonly Method $method, private readonly Login $login) {}
 
-    public function namespace(): ?XML_NS
+    public static function namespace(): ?XML_NS
     {
-        return XML_NS::sc;
+        return XML_NS::c;
     }
 
     public function attributes(): array
     {
         return [
-            XML_NS::wss_utility->attribute('Id') => 'uuid' . $this->method->uuid(),
+            XML_NS::u->alias('Id') => 'uuid' . $this->method->uuid(),
         ];
     }
 
@@ -27,8 +27,8 @@ class SecurityContextToken extends \Smartprax\Medidoc\XML\Nodes\Node
     {
         return [
             [
-                'name' => XML_NS::sc->clark('Identifier'),
-                'value' => 'urn:uuid:' . Uuid::uuid4(),
+                'name' => XML_NS::c->clark('Identifier'),
+                'value' => $this->login->identifier(),
             ]
         ];
     }

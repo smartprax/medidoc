@@ -8,20 +8,19 @@ use Smartprax\Medidoc\XML\XML_NS;
 
 class Body extends Node
 {
-    public Method $method;
+    public function __construct(protected Method $method)
+    {}
 
-    public function __construct(Method $method)
+    public static function namespace(): ?XML_NS
     {
-        $this->method = $method;
-    }
-
-    public function namespace(): ?XML_NS
-    {
-        return XML_NS::envelope;
+        return XML_NS::s;
     }
 
     public function xmlSerialize(Writer $writer): void
     {
-        $this->method->xmlSerialize($writer);
+        $writer->write([
+            'name' => $this->namespace()->clark('Body'),
+            'value' => $this->method,
+        ]);
     }
 }

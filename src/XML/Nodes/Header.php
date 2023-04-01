@@ -6,9 +6,9 @@ use Smartprax\Medidoc\XML\XML_NS;
 
 class Header extends Node
 {
-    public function namespace(): ?XML_NS
+    public static function namespace(): ?XML_NS
     {
-        return XML_NS::envelope;
+        return XML_NS::s;
     }
 
 }

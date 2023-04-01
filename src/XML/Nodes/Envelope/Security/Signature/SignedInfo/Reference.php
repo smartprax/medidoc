@@ -13,11 +13,6 @@ class Reference extends Node
 
     public function __construct(protected Method $method) {}
 
-    public function namespace(): ?XML_NS
-    {
-        return null;
-    }
-
     public function attributes(): array
     {
         return [

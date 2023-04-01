@@ -2,24 +2,22 @@
 
 namespace Smartprax\Medidoc\XML\Nodes\Envelope;
 
-use Ramsey\Uuid\Uuid;
+use Smartprax\Medidoc\Methods\Method;
 use Smartprax\Medidoc\XML\XML_NS;
 
 class MessageID extends \Smartprax\Medidoc\XML\Nodes\Node
 {
 
-    public function namespace(): ?XML_NS
-    {
-        return XML_NS::addressing;
-    }
+    public function __construct(private readonly Method $method)
+    {}
 
-    public function attributes(): array
+    public static function namespace(): ?XML_NS
     {
-        return [];
+        return XML_NS::a;
     }
 
     public function value(): string|array
     {
-        return 'urn:uuid:' . Uuid::uuid4();
+        return $this->method->messageId();
     }
 }

@@ -2,8 +2,10 @@
 
 namespace Smartprax\Medidoc\XML\Nodes\Envelope;
 
+use Smartprax\Medidoc\Methods\Login;
 use Smartprax\Medidoc\Methods\Method;
 use Smartprax\Medidoc\XML\Nodes\Envelope\Security\SecurityContextToken;
+use Smartprax\Medidoc\XML\Nodes\Envelope\Security\Signature;
 use Smartprax\Medidoc\XML\Nodes\Envelope\Security\Timestamp;
 use Smartprax\Medidoc\XML\Nodes\Node;
 use Smartprax\Medidoc\XML\XML_NS;
@@ -11,17 +13,17 @@ use Smartprax\Medidoc\XML\XML_NS;
 class Security extends Node
 {
 
-    public function __construct(protected Method $method) {}
+    public function __construct(protected Method $method, protected Login $login) {}
 
-    public function namespace(): ?XML_NS
+    public static function namespace(): ?XML_NS
     {
-        return XML_NS::wss_secext;
+        return XML_NS::o;
     }
 
     public function attributes(): array
     {
         return [
-            XML_NS::envelope->attribute('mustUnderstand') => '1'
+            XML_NS::s->alias('mustUnderstand') => '1'
         ];
     }
 
@@ -29,7 +31,8 @@ class Security extends Node
     {
         return [
             new Timestamp($this->method),
-            new SecurityContextToken($this->method),
+            new SecurityContextToken($this->method, $this->login),
+            new Signature($this->method, $this->login),
         ];
     }
 }

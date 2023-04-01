@@ -8,9 +8,9 @@ use Smartprax\Medidoc\XML\XML_NS;
 class ReplyTo extends Node
 {
 
-    public function namespace(): ?XML_NS
+    public static function namespace(): ?XML_NS
     {
-        return  XML_NS::addressing;
+        return  XML_NS::a;
     }
 
     public function attributes(): array
@@ -21,7 +21,7 @@ class ReplyTo extends Node
     public function value(): string|array
     {
         return [
-            'name' => XML_NS::addressing->clark('Address'),
+            'name' => XML_NS::a->clark('Address'),
             'value' => 'http://www.w3.org/2005/08/addressing/anonymous'
         ];
     }

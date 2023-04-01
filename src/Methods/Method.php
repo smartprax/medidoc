@@ -4,15 +4,18 @@ namespace Smartprax\Medidoc\Methods;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Lorisleiva\Actions\Concerns\AsCommand;
 use Ramsey\Uuid\Uuid;
+use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 use Smartprax\Medidoc\XML\MedidocXML;
 use Smartprax\Medidoc\XML\Nodes\Body;
 use Smartprax\Medidoc\XML\Nodes\Envelope\Action;
+use Smartprax\Medidoc\XML\Nodes\Envelope\LoginAction;
 use Smartprax\Medidoc\XML\Nodes\Envelope\LoginSecurity;
 use Smartprax\Medidoc\XML\Nodes\Envelope\MessageID;
 use Smartprax\Medidoc\XML\Nodes\Envelope\ReplyTo;
@@ -25,34 +28,11 @@ abstract class Method implements XmlSerializable
     use AsAction,
         AsCommand;
 
-    //protected function includes() : Inclusion
-    //{
-    //
-    //    $timestamp = \now('GMT');
-    //    $client_secret = base64_encode(
-    //        pack('H*', sha1(pack('H*', \mt_rand()) .
-    //                pack('a*', $timestamp->clone()->unix()) .
-    //                pack('a*', \config('medidoc.encryption_key'))
-    //            )
-    //        )
-    //    );
-    //
-    //    $ns_trust = 'http://schemas.xmlsoap.org/ws/2005/02/trust';
-    //
-    //    return Soap::include([
-    //        new \SoapVar(data: [
-    //            new \SoapVar(data: 'tp://schemas.xmlsoap.org/ws/ht2005/02/sc/sct', encoding: \XSD_STRING, nodeName: 'TokenType', nodeNamespace: $ns_trust),
-    //            new \SoapVar(data: 'http://schemas.xmlsoap.org/ws/2005/02/trust/Issue', encoding: \XSD_STRING, nodeName: 'RequestType', nodeNamespace: $ns_trust),
-    //            new \SoapVar(data: [
-    //                new \SoapVar(data: [
-    //                    '{' . static::NAMESPACES_WSS_SECURITY_UTILITY. '}:Id' => Uuid::uuid4(),
-    //                    'Type' => "http://schemas.xmlsoap.org/ws/2005/02/trust/Nonce",
-    //                    '_' => $client_secret
-    //                ], encoding: \XSD_STRING, nodeName: 'BinarySecret', nodeNamespace: $ns_trust),
-    //            ], encoding: \SOAP_ENC_OBJECT, nodeName: 'Entropy', nodeNamespace: $ns_trust),
-    //        ], encoding: \SOAP_ENC_OBJECT, nodeName: 'RequestSecurityToken', nodeNamespace: $ns_trust),
-    //    ]);
-    //}
+    private string $message_id;
+    private CarbonImmutable $timestamp;
+    private string $uuid;
+
+    abstract public function process(\SimpleXMLElement $body) : void;
 
     public function name() : Stringable
     {
@@ -63,49 +43,75 @@ abstract class Method implements XmlSerializable
 
     public function uuid() : string
     {
-        return Uuid::uuid4();
+        return $this->uuid ??= Uuid::uuid4();
     }
 
     public function timestamp() : CarbonImmutable
     {
-        return CarbonImmutable::now('GMT');
+        return $this->timestamp ??= CarbonImmutable::now('GMT');
     }
 
     public function messageId() : string
     {
-        return CarbonImmutable::now('GMT');
+        return $this->message_id ??= 'urn:uuid:' . Uuid::uuid4();
     }
 
-    public function handle() : string
+    /**
+     * @throws \Exception
+     */
+    public function handle() : void
     {
+        ray('timestamp: ' . $this->timestamp()->unix());
+        //ray('uuid: ' . $this->uuid());
 
-        return $this->login();
+        $login = $this->login();
 
-        //return $this->call();
+        $this->call(
+            $login
+        );
     }
 
-    public function login() : string
+    /**
+     * @throws \Exception
+     */
+    public function login() : Login
     {
-        return MedidocXML::write(
+        $loginMethod = new Login();
+
+        $writer = MedidocXML::write(
             Header::create()
-                ->addChild(new Action($this))
-                ->addChild(new MessageID())
+                ->addChild(new LoginAction())
+                ->addChild(new MessageID($this))
                 ->addChild(new ReplyTo())
                 ->addChild(new To())
                 ->addChild(new LoginSecurity($this)),
-            new Body($this));
+            new Body($loginMethod));
+
+        $body = MedidocXML::read($this->request($writer));
+
+        $loginMethod->process($body);
+
+        return $loginMethod;
     }
 
-    public function call() : string
+    /**
+     * @throws \Exception
+     */
+    public function call(Login $login) : void
     {
-        return MedidocXML::write(
+        $writer = MedidocXML::write(
             Header::create()
                 ->addChild(new Action($this))
-                ->addChild(new MessageID())
+                ->addChild(new MessageID($this))
                 ->addChild(new ReplyTo())
                 ->addChild(new To())
-                ->addChild(new Security($this)),
+                ->addChild(new Security($this, $login)),
             new Body($this));
+
+        //\ray()->xml($writer->outputMemory(false));
+
+        $body = MedidocXML::read($this->request($writer));
+        //$this->process($body);
     }
 
     public function getCommandSignature() :string
@@ -115,12 +121,30 @@ abstract class Method implements XmlSerializable
             ->prepend('medidoc:');
     }
 
+    /**
+     * @throws \Exception
+     */
     public function asCommand(Command $command): void
     {
-        $xml = $this->handle();
+        $this->handle();
+    }
 
-        $command->info($xml);
+    /**
+     * @throws \Exception
+     */
+    //private function request(Writer $writer): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
+    private function request(Writer $writer): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
+    {
+        $xml = $writer->outputMemory();
 
-        ray()->text($xml);
+        ray()->xml($xml);
+
+        $response = Http::withHeaders([
+            'Content-Type'=>'application/soap+xml',
+        ])
+            ->withBody($xml, "application/soap+xml")
+            ->post(\config('medidoc.endpoint'));
+
+        return $response;
     }
 }

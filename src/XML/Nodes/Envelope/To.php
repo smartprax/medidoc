@@ -8,15 +8,15 @@ use Smartprax\Medidoc\XML\XML_NS;
 class To extends Node
 {
 
-    public function namespace(): ?XML_NS
+    public static function namespace(): ?XML_NS
     {
-        return XML_NS::addressing;
+        return XML_NS::a;
     }
 
     public function attributes(): array
     {
         return [
-            XML_NS::envelope->attribute('mustUnderstand') => '1'
+            XML_NS::s->alias('mustUnderstand') => '1'
         ];
     }
 

@@ -11,7 +11,7 @@ class KeyInfo extends Node
 
     public function __construct(protected Method $method) {}
 
-    public function namespace(): ?XML_NS
+    public static function namespace(): ?XML_NS
     {
         return null;
     }
@@ -25,10 +25,10 @@ class KeyInfo extends Node
     {
         return [
             [
-                'name' => XML_NS::wss_secext->clark('SecurityTokenReference'),
+                'name' => XML_NS::o->clark('SecurityTokenReference'),
                 'value' => [
                     [
-                        'name' => XML_NS::wss_secext->clark('Reference'),
+                        'name' => XML_NS::o->clark('Reference'),
                         'attributes' => [
                             'ValueTupe' => 'http://schemas.xmlsoap.org/ws/2005/02/sc/sct',
                             'URI' => '#uuid-' . $this->method->uuid(),

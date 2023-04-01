@@ -2,13 +2,14 @@
 
 namespace Smartprax\Medidoc\XML\Nodes\Envelope;
 
-use Smartprax\Medidoc\Methods\Method;
 use Smartprax\Medidoc\XML\XML_NS;
 
-class Action extends \Smartprax\Medidoc\XML\Nodes\Node
+class LoginAction extends \Smartprax\Medidoc\XML\Nodes\Node
 {
 
-    public function __construct(private readonly Method $method) {}
+    protected ?string $name = 'Action';
+
+    public function __construct() {}
 
     public static function namespace(): ?XML_NS
     {
@@ -24,7 +25,7 @@ class Action extends \Smartprax\Medidoc\XML\Nodes\Node
 
     public function value(): array|string|null
     {
-        return 'http://tempuri.org/IMedidoc/' . $this->method->name();
+        return 'http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT';
     }
 
 }

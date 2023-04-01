@@ -9,17 +9,17 @@ use Smartprax\Medidoc\XML\XML_NS;
 class Timestamp extends Node
 {
 
-    public function __construct(protected Method $method) {}
+    public function __construct(private readonly Method $method) {}
 
-    public function namespace(): ?XML_NS
+    public static function namespace(): ?XML_NS
     {
-        return XML_NS::wss_utility;
+        return XML_NS::u;
     }
 
     public function attributes(): array
     {
         return [
-            XML_NS::wss_utility->attribute('Id') => '_0',
+            XML_NS::u->alias('Id') => '_0',
         ];
     }
 
@@ -27,13 +27,13 @@ class Timestamp extends Node
     {
         return [
             [
-                'name' => XML_NS::wss_utility->clark('Created'),
+                'name' => XML_NS::u->clark('Created'),
                 'value' => $this->created(),
             ],
 
             [
-                'name' => XML_NS::wss_utility->clark('Expires'),
-                'value' => $this->method->timestamp()->addSeconds(50)->toIso8601ZuluString(),
+                'name' => XML_NS::u->clark('Expires'),
+                'value' => $this->method->timestamp()->addSeconds(250)->toIso8601ZuluString(),
             ]
 
         ];
