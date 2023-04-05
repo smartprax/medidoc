@@ -42,15 +42,15 @@ class Login extends Method
                         name: XML_NS::t->clark('TokenType'),
                         value: 'http://schemas.xmlsoap.org/ws/2005/02/sc/sct'),
                     Node::create(name: XML_NS::t->clark('RequestType'), value: 'http://schemas.xmlsoap.org/ws/2005/02/trust/Issue'),
-                    Node::create(name: XML_NS::t->clark('Entropy'),  value: [
-                        Node::create(
-                            name: XML_NS::t->clark('BinarySecret'),
-                            attributes: [
-                                XML_NS::u->alias('id') => 'uuid-' . Uuid::uuid4() . '-1',
-                                'Type' => 'http://schemas.xmlsoap.org/ws/2005/02/trust/Nonce',
-                            ],
-                            value: $this->client_secret)
-                    ]),
+                    //Node::create(name: XML_NS::t->clark('Entropy'),  value: [
+                    //    Node::create(
+                    //        name: XML_NS::t->clark('BinarySecret'),
+                    //        attributes: [
+                    //            XML_NS::u->alias('id') => 'uuid-' . Uuid::uuid4() . '-1',
+                    //            'Type' => 'http://schemas.xmlsoap.org/ws/2005/02/trust/Nonce',
+                    //        ],
+                    //        value: $this->client_secret)
+                    //]),
                     Node::create(name: XML_NS::t->clark('KeySize'), value: '256'),
                 ]
             )

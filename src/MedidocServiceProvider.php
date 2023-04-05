@@ -2,6 +2,7 @@
 
 namespace Smartprax\Medidoc;
 
+use Smartprax\Medidoc\Commands\CheckWssCommand;
 use Smartprax\Medidoc\Methods\CheckConnection;
 use Smartprax\Medidoc\Methods\ListFunctions;
 use Spatie\LaravelPackageTools\Package;
@@ -17,7 +18,8 @@ class MedidocServiceProvider extends PackageServiceProvider
             //->hasMigration('create_medidoc_table')
             ->hasCommands([
                 ListFunctions::class,
-                CheckConnection::class
+                CheckConnection::class,
+                CheckWssCommand::class
             ]);
     }
 

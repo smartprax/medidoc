@@ -24,8 +24,10 @@
     "spatie/laravel-data": "^3.2",
     "spatie/laravel-package-tools": "^1.14.0",
     "symfony/http-client": "^6.2",
+    "wsdltophp/wssecurity": "^2.0",
     "ext-dom": "*",
-    "ext-simplexml": "*"
+    "ext-simplexml": "*",
+    "ext-soap": "*"
   },
   "require-dev": {
     "laravel/pint": "^1.0",
