@@ -8,7 +8,7 @@ use Smartprax\Medidoc\Entitites\CheckConnectionResponse;
 use SoapClient;
 use WsdlToPhp\WsSecurity\WsSecurity;
 
-class CheckWssCommand extends Command
+class CheckConnectionCommand extends Command
 {
     public $signature = 'medidoc:wss';
     public $description = 'medidoc wss';
