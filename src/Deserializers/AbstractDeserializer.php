@@ -12,7 +12,7 @@ abstract class AbstractDeserializer implements XmlDeserializable
      *
      * @return string
      */
-    protected function entityClass() : string
+    protected function entityClass(): string
     {
         return  Str::of(get_class($this))
             ->replace('\\', '/', )

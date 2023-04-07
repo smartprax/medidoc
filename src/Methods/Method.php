@@ -10,14 +10,14 @@ use Stringable;
 
 abstract class Method
 {
-    use AsAction,
-        AsCommand;
+    use AsAction;
+    use AsCommand;
 
     abstract public function request();
 
     abstract public function response();
 
-    public function name() : Stringable
+    public function name(): Stringable
     {
         return Str::of(get_class($this))
             ->replace('\\', '/')
@@ -27,12 +27,12 @@ abstract class Method
     /**
      * @throws \Exception
      */
-    public function handle() : void
+    public function handle(): void
     {
 
     }
 
-    public function getCommandSignature() :string
+    public function getCommandSignature(): string
     {
         return $this->name()
             ->snake('-')

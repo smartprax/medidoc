@@ -17,17 +17,16 @@
   ],
   "require": {
     "php": "^8.1",
+    "ext-dom": "*",
+    "ext-simplexml": "*",
+    "ext-soap": "*",
     "guzzlehttp/guzzle": "^7.5",
     "illuminate/contracts": "^10.0",
     "lorisleiva/laravel-actions": "^2.5",
+    "phpro/soap-client": "^2.4",
     "sabre/xml": "^4.0",
     "spatie/laravel-data": "^3.2",
-    "spatie/laravel-package-tools": "^1.14.0",
-    "symfony/http-client": "^6.2",
-    "wsdltophp/wssecurity": "^2.0",
-    "ext-dom": "*",
-    "ext-simplexml": "*",
-    "ext-soap": "*"
+    "spatie/laravel-package-tools": "^1.14.0"
   },
   "require-dev": {
     "laravel/pint": "^1.0",
@@ -36,6 +35,7 @@
     "pestphp/pest": "^2.0",
     "pestphp/pest-plugin-arch": "^2.0",
     "pestphp/pest-plugin-laravel": "^2.0",
+    "rector/rector": "^0.15.24",
     "spatie/laravel-ray": "^1.26",
     "wulfheart/laravel-actions-ide-helper": "^0.4.0"
   },

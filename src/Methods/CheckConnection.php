@@ -6,9 +6,13 @@ use Sabre\Xml\Writer;
 
 class CheckConnection extends Method
 {
-
-    public function process(\SimpleXMLElement $body): void
+    public function request()
     {
-        // TODO: Implement process() method.
+        // TODO: Implement request() method.
+    }
+
+    public function response()
+    {
+        // TODO: Implement response() method.
     }
 }
