@@ -94,10 +94,7 @@ class MedidocClient
 {
 
     public function __construct(private readonly Caller $caller)
-    {
-
-
-    }
+    {}
 
     public function checkConnection(CheckConnection $parameters): CheckConnectionResponse
     {
@@ -273,6 +270,7 @@ class MedidocClient
     {
         return ($this->caller)('GetPendingReminders', $parameters);
     }
+
     public function sendReminderAcknowledgement(SendReminderAcknowledgement $parameters): SendReminderAcknowledgementResponse
     {
         return ($this->caller)('SendReminderAcknowledgement', $parameters);
