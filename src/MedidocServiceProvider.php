@@ -28,6 +28,7 @@ class MedidocServiceProvider extends PackageServiceProvider
             );
 
             $eventDispatcher = new EventDispatcher();
+
             $eventDispatcher->addListener(RequestEvent::class, function (RequestEvent $event) {
 
                 /** @var MedidocRequest $request */
@@ -35,7 +36,6 @@ class MedidocServiceProvider extends PackageServiceProvider
 
                 $request->gln = config('medidoc.gln');
                 $request->password = config('medidoc.password');
-
             });
 
             $caller = new EventDispatchingCaller(new EngineCaller($engine), $eventDispatcher);
