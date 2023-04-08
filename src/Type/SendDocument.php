@@ -2,24 +2,8 @@
 
 namespace Smartprax\Medidoc\Type;
 
-use Phpro\SoapClient\Type\RequestInterface;
-
-class SendDocument implements RequestInterface
+class SendDocument extends MedidocRequest
 {
-    public function __construct(private DocumentData $documentData)
-    {
-    }
-
-    public function getDocumentData(): DocumentData
-    {
-        return $this->documentData;
-    }
-
-    public function withDocumentData(DocumentData $documentData): SendDocument|static
-    {
-        $new = clone $this;
-        $new->documentData = $documentData;
-
-        return $new;
-    }
+    public function __construct(public DocumentData $documentData)
+    {}
 }

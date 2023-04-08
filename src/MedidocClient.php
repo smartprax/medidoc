@@ -94,7 +94,10 @@ class MedidocClient
 {
 
     public function __construct(private readonly Caller $caller)
-    {}
+    {
+
+
+    }
 
     public function checkConnection(CheckConnection $parameters): CheckConnectionResponse
     {

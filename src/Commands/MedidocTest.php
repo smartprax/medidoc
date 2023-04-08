@@ -18,8 +18,6 @@ class MedidocTest extends Command
         $client = MedidocClientFactory::factory(config('medidoc.endpoint'));
         $response = $client->getInsuranceList(
             new GetInsuranceList(
-                config('medidoc.gln'),
-                config('medidoc.password'),
                 new ArrayOfNameValue([new NameValue('Canton', 'ZH')])
             )
         );
