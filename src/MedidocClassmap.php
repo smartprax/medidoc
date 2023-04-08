@@ -3,8 +3,8 @@
 namespace Smartprax\Medidoc;
 
 use Smartprax\Medidoc\Type;
-use Soap\ExtSoapEngine\Configuration\ClassMap\ClassMapCollection;
 use Soap\ExtSoapEngine\Configuration\ClassMap\ClassMap;
+use Soap\ExtSoapEngine\Configuration\ClassMap\ClassMapCollection;
 
 class MedidocClassmap
 {
@@ -83,8 +83,8 @@ class MedidocClassmap
             new ClassMap('GlnPartyData', Type\GlnPartyData::class),
             new ClassMap('SearchGlnPartyData', Type\SearchGlnPartyData::class),
             new ClassMap('SearchGlnPartyDataResponse', Type\SearchGlnPartyDataResponse::class),
-            new ClassMap('GetInsuranceList', Type\GetInsuranceList::class),
-            new ClassMap('GetInsuranceListResponse', Type\GetInsuranceListResponse::class),
+            new ClassMap('GetInsuranceList', Requests\GetInsuranceList::class),
+            //new ClassMap('GetInsuranceListResponse', Responses\GetInsuranceListResponse::class),
             new ClassMap('InsuranceListResponse', Type\InsuranceListResponse::class),
             new ClassMap('ArrayOfInsuranceData', Type\ArrayOfInsuranceData::class),
             new ClassMap('InsuranceData', Type\InsuranceData::class),

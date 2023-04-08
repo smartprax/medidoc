@@ -35,8 +35,6 @@ use Smartprax\Medidoc\Type\GetFolderContentList;
 use Smartprax\Medidoc\Type\GetFolderContentListResponse;
 use Smartprax\Medidoc\Type\GetGlnPartyData;
 use Smartprax\Medidoc\Type\GetGlnPartyDataResponse;
-use Smartprax\Medidoc\Type\GetInsuranceList;
-use Smartprax\Medidoc\Type\GetInsuranceListResponse;
 use Smartprax\Medidoc\Type\GetNewInsuranceAddress;
 use Smartprax\Medidoc\Type\GetNewInsuranceAddressByDocumentID;
 use Smartprax\Medidoc\Type\GetNewInsuranceAddressByDocumentIDResponse;
@@ -93,8 +91,13 @@ use Smartprax\Medidoc\Type\UploadEsrFileResponse;
 class MedidocClient
 {
 
-    public function __construct(private readonly Caller $caller)
+    public function __construct(public readonly Caller $caller)
     {}
+
+    public function caller()
+    {
+        return $this->caller;
+    }
 
     public function checkConnection(CheckConnection $parameters): CheckConnectionResponse
     {
@@ -226,10 +229,10 @@ class MedidocClient
         return ($this->caller)('SearchGlnPartyData', $parameters);
     }
 
-    public function getInsuranceList(GetInsuranceList $parameters): GetInsuranceListResponse
-    {
-        return ($this->caller)('GetInsuranceList', $parameters);
-    }
+    //public function getInsuranceList(GetInsuranceList $parameters): GetInsuranceListResponse
+    //{
+    //    return ($this->caller)('GetInsuranceList', $parameters);
+    //}
 
     public function getPersonOrOrganizationList(GetPersonOrOrganizationList $parameters): GetPersonOrOrganizationListResponse
     {

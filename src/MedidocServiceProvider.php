@@ -6,8 +6,9 @@ use Phpro\SoapClient\Caller\EngineCaller;
 use Phpro\SoapClient\Caller\EventDispatchingCaller;
 use Phpro\SoapClient\Event\RequestEvent;
 use Phpro\SoapClient\Soap\DefaultEngineFactory;
+use Smartprax\Medidoc\Actions\MedidocRequest;
 use Smartprax\Medidoc\Commands\MedidocTest;
-use Smartprax\Medidoc\Type\MedidocRequest;
+use Smartprax\Medidoc\Requests\GetInsuranceList;
 use Soap\ExtSoapEngine\ExtSoapOptions;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -20,7 +21,7 @@ class MedidocServiceProvider extends PackageServiceProvider
     {
         parent::boot();
 
-        $this->app->singleton(MedidocClient::class, function () {
+        $this->app->singleton(Medidoc::class, function () {
 
             $engine = DefaultEngineFactory::create(
                 ExtSoapOptions::defaults(config('medidoc.endpoint'))
@@ -40,7 +41,8 @@ class MedidocServiceProvider extends PackageServiceProvider
 
             $caller = new EventDispatchingCaller(new EngineCaller($engine), $eventDispatcher);
 
-            return new MedidocClient($caller);
+            return new Medidoc($caller);
+
         });
     }
 
@@ -50,7 +52,8 @@ class MedidocServiceProvider extends PackageServiceProvider
             ->name('medidoc')
             ->hasConfigFile('medidoc')
             ->hasCommands([
-                MedidocTest::class
+                MedidocTest::class,
+                GetInsuranceList::class,
             ]);
     }
 
