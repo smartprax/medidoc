@@ -5,10 +5,10 @@ namespace Smartprax\Medidoc\Requests;
 use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsCommand;
 use Smartprax\Medidoc\Responses\InsuranceListResponse;
-use Smartprax\Medidoc\Type\ArrayOfNameValue;
-use Smartprax\Medidoc\Type\GetInsuranceListResult;
-use Smartprax\Medidoc\Type\InsuranceData;
-use Smartprax\Medidoc\Type\NameValue;
+use Smartprax\Medidoc\Entities\ArrayOfNameValue;
+use Smartprax\Medidoc\Entities\GetInsuranceListResult;
+use Smartprax\Medidoc\Entities\InsuranceData;
+use Smartprax\Medidoc\Entities\NameValue;
 
 /**
  * See http://api.medidoc.ch/methods/getinsurancelist/ for filter specs.

@@ -2,7 +2,7 @@
 
 namespace Smartprax\Medidoc\Responses;
 
-use Smartprax\Medidoc\Type\ArrayOfInsuranceData;
+use Smartprax\Medidoc\Entities\ArrayOfInsuranceData;
 
 class InsuranceListResponse extends MedidataResponse
 {
