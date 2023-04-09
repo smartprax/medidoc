@@ -229,7 +229,7 @@ class MedidocClient
         return ($this->caller)('SearchGlnPartyData', $parameters);
     }
 
-    //public function getInsuranceList(GetInsuranceList $parameters): GetInsuranceListResponse
+    //public function getInsuranceList(GetInsuranceList $parameters): GetInsuranceListResult
     //{
     //    return ($this->caller)('GetInsuranceList', $parameters);
     //}

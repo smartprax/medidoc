@@ -2,7 +2,7 @@
 
 namespace Smartprax\Medidoc\Type;
 
-class InsuranceListResponse
+class GetInsuranceListResult
 {
     public function __construct(
         public readonly int $ReturnStatus,

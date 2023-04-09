@@ -2,11 +2,8 @@
 
 namespace Smartprax\Medidoc;
 
-use Phpro\SoapClient\Caller\EngineCaller;
-use Phpro\SoapClient\Soap\DefaultEngineFactory;
 use Smartprax\Medidoc\Commands\MedidocTest;
 use Smartprax\Medidoc\Requests\GetInsuranceList;
-use Soap\ExtSoapEngine\ExtSoapOptions;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -17,18 +14,7 @@ class MedidocServiceProvider extends PackageServiceProvider
     {
         parent::boot();
 
-        $this->app->singleton(Medidoc::class, function () {
-
-            return new Medidoc(
-                new EngineCaller(
-                    DefaultEngineFactory::create(
-                        ExtSoapOptions::defaults(config('medidoc.endpoint'))
-                            ->withClassMap(MedidocClassmap::getCollection())
-                    )
-                )
-            );
-
-        });
+        $this->app->singleton(Medidoc::class, fn() => new Medidoc());
     }
 
     public function configurePackage(Package $package): void

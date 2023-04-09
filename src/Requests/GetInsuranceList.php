@@ -4,10 +4,10 @@ namespace Smartprax\Medidoc\Requests;
 
 use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsCommand;
-use phpDocumentor\Reflection\Exception;
+use Smartprax\Medidoc\Responses\InsuranceListResponse;
 use Smartprax\Medidoc\Type\ArrayOfNameValue;
+use Smartprax\Medidoc\Type\GetInsuranceListResult;
 use Smartprax\Medidoc\Type\InsuranceData;
-use Smartprax\Medidoc\Type\InsuranceListResponse;
 use Smartprax\Medidoc\Type\NameValue;
 
 /**
@@ -24,9 +24,6 @@ class GetInsuranceList extends MedidocRequest
         return $this->call(\compact('filterParameters'));
     }
 
-    /**
-     * @throws Exception
-     */
     public function asCommand(Command $command): void
     {
         //$filter_name = $command->choice(

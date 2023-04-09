@@ -5,51 +5,55 @@ namespace Smartprax\Medidoc\Requests;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Phpro\SoapClient\Type\MixedResult;
 use Phpro\SoapClient\Type\RequestInterface;
 use Smartprax\Medidoc\Facades\Medidoc;
+use Smartprax\Medidoc\Responses\MedidataResponse;
 
 abstract class MedidocRequest implements RequestInterface
 {
     use AsAction;
 
-    public string $gln;
-    public string $password;
-
-    public function method(): Stringable
+    public function method(): string
     {
-        return Str::of(get_class($this))
-            ->replace('\\', '/')
-            ->basename();
+        return $this
+            ->className()
+            ->toString();
     }
 
-    public function responseClass(): string
+    private function responseProp(): string
     {
-        return 'Smartprax\Medidoc\Responses\\' . $this->method()->append('Response');
+        return $this
+            ->className()
+            ->append('Result')
+            ->toString();
     }
 
     protected function call(array $properties)
     {
-        /** @var MixedResult $response */
-        $response = Medidoc::call($this, $properties);
+        /** @var MedidataResponse $response */
+        $response = Medidoc::call($this, $properties)->{$this->responseProp()};
 
-        $type = $response->getResult();
-        $vars = get_object_vars($type);
-        $responseType = \reset($vars);
-
-        if ($responseType->ReturnStatus !== 1) {
-            throw new \Exception($responseType->ReturnMessage);
+        if ($response->ReturnStatus !== 1) {
+            throw new \Exception($response->ReturnMessage);
         }
 
-        return $responseType;
+        return $response;
     }
 
     public function getCommandSignature(): string
     {
         return $this
-            ->method()
+            ->className()
             ->snake('-')
-            ->prepend('medidoc:');
+            ->prepend('medidoc:')
+            ->toString();
+    }
+
+    private function className() : Stringable
+    {
+        return Str::of(get_class($this))
+            ->replace('\\', '/')
+            ->basename();
     }
 
 }
