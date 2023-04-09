@@ -28,13 +28,10 @@ abstract class MedidocRequest implements RequestInterface
         return 'Smartprax\Medidoc\Responses\\' . $this->method()->append('Response');
     }
 
-    /**
-     * @throws Exception
-     */
-    protected function call()
+    protected function call(array $properties)
     {
         /** @var MixedResult $response */
-        $response = Medidoc::call($this);
+        $response = Medidoc::call($this, $properties);
 
         $type = $response->getResult();
         $vars = get_object_vars($type);

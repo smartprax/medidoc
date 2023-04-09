@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Facade;
 use Smartprax\Medidoc\Requests\MedidocRequest;
 
 /**
- * @method static call(MedidocRequest $method)
+ * @method static call(MedidocRequest $method, array $props)
  */
 class Medidoc extends Facade
 {

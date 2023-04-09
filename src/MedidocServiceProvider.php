@@ -3,16 +3,12 @@
 namespace Smartprax\Medidoc;
 
 use Phpro\SoapClient\Caller\EngineCaller;
-use Phpro\SoapClient\Caller\EventDispatchingCaller;
-use Phpro\SoapClient\Event\RequestEvent;
 use Phpro\SoapClient\Soap\DefaultEngineFactory;
-use Smartprax\Medidoc\Actions\MedidocRequest;
 use Smartprax\Medidoc\Commands\MedidocTest;
 use Smartprax\Medidoc\Requests\GetInsuranceList;
 use Soap\ExtSoapEngine\ExtSoapOptions;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class MedidocServiceProvider extends PackageServiceProvider
 {
@@ -23,25 +19,14 @@ class MedidocServiceProvider extends PackageServiceProvider
 
         $this->app->singleton(Medidoc::class, function () {
 
-            $engine = DefaultEngineFactory::create(
-                ExtSoapOptions::defaults(config('medidoc.endpoint'))
-                    ->withClassMap(MedidocClassmap::getCollection())
+            return new Medidoc(
+                new EngineCaller(
+                    DefaultEngineFactory::create(
+                        ExtSoapOptions::defaults(config('medidoc.endpoint'))
+                            ->withClassMap(MedidocClassmap::getCollection())
+                    )
+                )
             );
-
-            $eventDispatcher = new EventDispatcher();
-
-            $eventDispatcher->addListener(RequestEvent::class, function (RequestEvent $event) {
-
-                /** @var MedidocRequest $request */
-                $request = $event->getRequest();
-
-                $request->gln = config('medidoc.gln');
-                $request->password = config('medidoc.password');
-            });
-
-            $caller = new EventDispatchingCaller(new EngineCaller($engine), $eventDispatcher);
-
-            return new Medidoc($caller);
 
         });
     }
@@ -56,6 +41,4 @@ class MedidocServiceProvider extends PackageServiceProvider
                 GetInsuranceList::class,
             ]);
     }
-
-
 }

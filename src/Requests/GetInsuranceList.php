@@ -12,17 +12,16 @@ use Smartprax\Medidoc\Type\NameValue;
 
 /**
  * See http://api.medidoc.ch/methods/getinsurancelist/ for filter specs.
+ *
+ * @method run(ArrayOfNameValue $filterParameters)
  */
 class GetInsuranceList extends MedidocRequest
 {
     use AsCommand;
 
-    public ArrayOfNameValue $filterParameters;
-
     public function handle(ArrayOfNameValue $filterParameters): InsuranceListResponse
     {
-        $this->filterParameters = $filterParameters;
-        return $this->call();
+        return $this->call(\compact('filterParameters'));
     }
 
     /**
@@ -38,19 +37,19 @@ class GetInsuranceList extends MedidocRequest
         //
         //$filter_value = $command->ask('Value?');
         //
-        //$this->filterParameters = new ArrayOfNameValue([
+        //$filters = new ArrayOfNameValue([
         //    new NameValue($filter_name, $filter_value)
         //]);
 
         $filters = new ArrayOfNameValue([
-            new NameValue('Canton', 'ZH')
+            new NameValue('Canton', 'AG')
         ]);
 
-        $res = $this->handle($filters);
+        $response = $this->handle($filters);
 
         $command->table(
-            array_keys(get_object_vars($res->AddressList->InsuranceData[0])),
-            \array_map(fn(InsuranceData $insuranceData) => (array) $insuranceData, $res->AddressList->InsuranceData),
+            array_keys(get_object_vars($response->AddressList->InsuranceData[0])),
+            \array_map(fn(InsuranceData $insuranceData) => (array) $insuranceData, $response->AddressList->InsuranceData),
         );
 
     }
