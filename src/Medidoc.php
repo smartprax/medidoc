@@ -2,7 +2,10 @@
 
 namespace Smartprax\Medidoc;
 
+use Illuminate\Support\Str;
+use ReflectionClass;
 use Smartprax\Medidoc\Requests\MedidocRequest;
+use Symfony\Component\Finder\Finder;
 
 class Medidoc
 {
