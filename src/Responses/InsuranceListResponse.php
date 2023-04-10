@@ -4,10 +4,8 @@ namespace Smartprax\Medidoc\Responses;
 
 use Smartprax\Medidoc\Entities\ArrayOfInsuranceData;
 
-class InsuranceListResponse extends MedidataResponse
+class InsuranceListResponse extends GenericResponse
 {
-    public function __construct(
-        public readonly ArrayOfInsuranceData $AddressList
-    )
+    public function __construct(public readonly ArrayOfInsuranceData $AddressList)
     {}
 }

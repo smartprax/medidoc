@@ -7,7 +7,6 @@ use Illuminate\Support\Stringable;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Phpro\SoapClient\Type\RequestInterface;
 use Smartprax\Medidoc\Facades\Medidoc;
-use Smartprax\Medidoc\Responses\MedidataResponse;
 
 abstract class MedidocRequest implements RequestInterface
 {
@@ -30,7 +29,6 @@ abstract class MedidocRequest implements RequestInterface
 
     protected function call(array $properties)
     {
-        /** @var MedidataResponse $response */
         $response = Medidoc::call($this, $properties)->{$this->responseProp()};
 
         if ($response->ReturnStatus !== 1) {

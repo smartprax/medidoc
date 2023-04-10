@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsCommand;
 use Smartprax\Medidoc\Responses\InsuranceListResponse;
 use Smartprax\Medidoc\Entities\ArrayOfNameValue;
-use Smartprax\Medidoc\Entities\GetInsuranceListResult;
 use Smartprax\Medidoc\Entities\InsuranceData;
 use Smartprax\Medidoc\Entities\NameValue;
 
