@@ -5,12 +5,14 @@ namespace Smartprax\Medidoc\Requests;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Lorisleiva\Actions\Concerns\AsAction;
+use Lorisleiva\Actions\Concerns\AsCommand;
 use Phpro\SoapClient\Type\RequestInterface;
 use Smartprax\Medidoc\Facades\Medidoc;
 
 abstract class MedidocRequest implements RequestInterface
 {
-    use AsAction;
+    use AsAction,
+        AsCommand;
 
     public function method(): string
     {

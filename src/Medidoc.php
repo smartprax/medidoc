@@ -99,7 +99,6 @@ class Medidoc
             'ArrayOfInsuranceData' => Entities\ArrayOfInsuranceData::class,
             'InsuranceData' => Entities\InsuranceData::class,
             'GetPersonOrOrganizationList' => Requests\GetPersonOrOrganizationList::class,
-            'GetPersonOrOrganizationListResponse' => Responses\GetPersonOrOrganizationListResponse::class,
             'PersonOrOrganizationListResponse' => Responses\PersonOrOrganizationListResponse::class,
             'ArrayOfPersonOrOrganization' => Entities\ArrayOfPersonOrOrganization::class,
             'PersonOrOrganization' => Entities\PersonOrOrganization::class,
