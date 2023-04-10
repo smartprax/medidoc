@@ -33,13 +33,13 @@ class GetPersonOrOrganizationList extends MedidocRequest
         //    new NameValue($filter_name, $filter_value)
         //]);
 
+        // TODO: make dynamic.
+
         $filters = new ArrayOfNameValue([
             new NameValue('Canton', 'AG')
         ]);
 
         $response = $this->handle($filters);
-
-        ray($response);
 
         $command->table(
             array_keys(get_object_vars($response->AddressList->PersonOrOrganization[0])),

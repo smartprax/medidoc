@@ -37,6 +37,8 @@ class GetInsuranceList extends MedidocRequest
         //    new NameValue($filter_name, $filter_value)
         //]);
 
+        // TODO: make dynamic.
+
         $filters = new ArrayOfNameValue([
             new NameValue('Canton', 'AG')
         ]);
