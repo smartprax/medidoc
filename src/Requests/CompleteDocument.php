@@ -8,7 +8,7 @@ class CompleteDocument extends MedidocRequest
 {
     public function handle(string $medidocDocumentGID, \DateTimeInterface $completeDate) : CompleteDocumentResponse
     {
-        $this->call(\compact('medidocDocumentGID', $completeDate));
+        return $this->call(\compact('medidocDocumentGID', $completeDate));
     }
 
 }

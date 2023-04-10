@@ -9,6 +9,6 @@ class OrderPrintServiceByDocumentID extends MedidocRequest
 {
     public function handle(string $documentID, Address $deliveryAddress, bool $isTPCopy) : OrderPrintServiceByDocumentIDResponse
     {
-        $this->call(\compact('documentID', 'deliveryAddress', 'isTPCopy'));
+        return $this->call(\compact('documentID', 'deliveryAddress', 'isTPCopy'));
     }
 }

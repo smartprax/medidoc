@@ -8,6 +8,6 @@ class SendReminderAcknowledgement extends MedidocRequest
 {
     public function handle(string $token) : SendReminderAcknowledgementResponse
     {
-        $this->call(\compact('token'));
+        return $this->call(\compact('token'));
     }
 }

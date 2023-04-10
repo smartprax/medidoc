@@ -7,7 +7,7 @@ use Smartprax\Medidoc\Responses\GetPersonOrOrganizationListResponse;
 
 class GetPersonOrOrganizationList extends MedidocRequest
 {
-    public function handle( ArrayOfNameValue $filterParameters) : GetPersonOrOrganizationListResponse
+    public function handle(ArrayOfNameValue $filterParameters) : GetPersonOrOrganizationListResponse
     {
         return $this->call(compact('filterParameters'));
     }

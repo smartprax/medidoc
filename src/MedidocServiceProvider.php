@@ -2,7 +2,6 @@
 
 namespace Smartprax\Medidoc;
 
-use Smartprax\Medidoc\Commands\MedidocTest;
 use Smartprax\Medidoc\Requests\GetInsuranceList;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -23,7 +22,6 @@ class MedidocServiceProvider extends PackageServiceProvider
             ->name('medidoc')
             ->hasConfigFile('medidoc')
             ->hasCommands([
-                MedidocTest::class,
                 GetInsuranceList::class,
             ]);
     }

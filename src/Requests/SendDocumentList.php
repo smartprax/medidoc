@@ -3,11 +3,12 @@
 namespace Smartprax\Medidoc\Requests;
 
 use Smartprax\Medidoc\Entities\ArrayOfDocumentData;
+use Smartprax\Medidoc\Responses\SendDocumentListResponse;
 
 class SendDocumentList extends MedidocRequest
 {
-    public function handle(ArrayOfDocumentData $documentDataList)
+    public function handle(ArrayOfDocumentData $documentDataList) : SendDocumentListResponse
     {
-        $this->call(\compact('documentDataList'));
+        return $this->call(\compact('documentDataList'));
     }
 }

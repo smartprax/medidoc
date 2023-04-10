@@ -9,6 +9,6 @@ class SendDocument extends MedidocRequest
 {
     public function handle(DocumentData $documentData) : SendDocumentResponse
     {
-        $this->call(\compact($documentData));
+        return $this->call(\compact($documentData));
     }
 }

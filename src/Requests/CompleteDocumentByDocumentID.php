@@ -8,6 +8,6 @@ class CompleteDocumentByDocumentID extends MedidocRequest
 {
     public function handle(string $documentID, \DateTimeInterface $completeDate) : CompleteDocumentByDocumentIDResponse
     {
-        $this->call(\compact('documentID', $completeDate));
+        return $this->call(\compact('documentID', $completeDate));
     }
 }
