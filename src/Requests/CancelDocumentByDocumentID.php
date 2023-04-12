@@ -2,10 +2,12 @@
 
 namespace Smartprax\Medidoc\Requests;
 
+use Smartprax\Medidoc\Medidoc;
+
 class CancelDocumentByDocumentID extends MedidocRequest
 {
     public function handle(string $documentID)
     {
-        $this->call(\compact($documentID));
+        Medidoc::call($this, \compact($documentID));
     }
 }

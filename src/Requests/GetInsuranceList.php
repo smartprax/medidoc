@@ -4,6 +4,7 @@ namespace Smartprax\Medidoc\Requests;
 
 use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsCommand;
+use Smartprax\Medidoc\Facades\Medidoc;
 use Smartprax\Medidoc\Responses\InsuranceListResponse;
 use Smartprax\Medidoc\Entities\ArrayOfNameValue;
 use Smartprax\Medidoc\Entities\InsuranceData;
@@ -20,7 +21,7 @@ class GetInsuranceList extends MedidocRequest
 
     public function handle(ArrayOfNameValue $filterParameters): InsuranceListResponse
     {
-        return $this->call(\compact('filterParameters'));
+        return Medidoc::call($this, \compact('filterParameters'));
     }
 
     public function asCommand(Command $command): void

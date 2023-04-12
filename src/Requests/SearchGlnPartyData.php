@@ -2,6 +2,7 @@
 
 namespace Smartprax\Medidoc\Requests;
 
+use Smartprax\Medidoc\Facades\Medidoc;
 use Smartprax\Medidoc\Responses\SearchGlnPartyDataResponse;
 
 class SearchGlnPartyData extends MedidocRequest
@@ -19,6 +20,6 @@ class SearchGlnPartyData extends MedidocRequest
         int $insuranceType
     ) : SearchGlnPartyDataResponse
     {
-        return $this->call(\compact('orgRole', 'ean', 'organisation', 'firstName', 'lastName', 'street', 'zipCode', 'city', 'canton', 'insuranceType'));
+        return Medidoc::call($this, \compact('orgRole', 'ean', 'organisation', 'firstName', 'lastName', 'street', 'zipCode', 'city', 'canton', 'insuranceType'));
     }
 }

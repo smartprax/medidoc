@@ -7,6 +7,7 @@ use Smartprax\Medidoc\Entities\ArrayOfNameValue;
 use Smartprax\Medidoc\Entities\InsuranceData;
 use Smartprax\Medidoc\Entities\NameValue;
 use Smartprax\Medidoc\Entities\PersonOrOrganization;
+use Smartprax\Medidoc\Facades\Medidoc;
 use Smartprax\Medidoc\Responses\PersonOrOrganizationListResponse;
 
 /**
@@ -16,7 +17,7 @@ class GetPersonOrOrganizationList extends MedidocRequest
 {
     public function handle(ArrayOfNameValue $filterParameters) : PersonOrOrganizationListResponse
     {
-        return $this->call(compact('filterParameters'));
+        return Medidoc::call($this, compact('filterParameters'));
     }
 
     public function asCommand(Command $command): void

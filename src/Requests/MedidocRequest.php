@@ -21,23 +21,12 @@ abstract class MedidocRequest implements RequestInterface
             ->toString();
     }
 
-    private function responseProp(): string
+    public function responseProp(): string
     {
         return $this
             ->className()
             ->append('Result')
             ->toString();
-    }
-
-    protected function call(array $properties)
-    {
-        $response = Medidoc::call($this, $properties)->{$this->responseProp()};
-
-        if ($response->ReturnStatus !== 1) {
-            throw new \Exception($response->ReturnMessage);
-        }
-
-        return $response;
     }
 
     public function getCommandSignature(): string

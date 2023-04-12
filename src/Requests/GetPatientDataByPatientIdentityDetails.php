@@ -2,6 +2,7 @@
 
 namespace Smartprax\Medidoc\Requests;
 
+use Smartprax\Medidoc\Facades\Medidoc;
 use Smartprax\Medidoc\Responses\GetPatientDataByPatientIdentityDetailsResponse;
 
 class GetPatientDataByPatientIdentityDetails extends MedidocRequest
@@ -15,6 +16,6 @@ class GetPatientDataByPatientIdentityDetails extends MedidocRequest
         string $zipCode
     ) : GetPatientDataByPatientIdentityDetailsResponse
     {
-        return $this->call(\compact('patientFirstname', 'patientLastname', 'patientBirthday', 'patientGender', 'treatmentDate', 'zipCode'));
+        return Medidoc::call($this, \compact('patientFirstname', 'patientLastname', 'patientBirthday', 'patientGender', 'treatmentDate', 'zipCode'));
     }
 }

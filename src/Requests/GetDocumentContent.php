@@ -2,12 +2,13 @@
 
 namespace Smartprax\Medidoc\Requests;
 
+use Smartprax\Medidoc\Facades\Medidoc;
 use Smartprax\Medidoc\Responses\GetDocumentContentResponse;
 
 class GetDocumentContent extends MedidocRequest
 {
     public function handle(string $medidocDocumentGID, bool $contentAsPdf) : GetDocumentContentResponse
     {
-        return $this->call(\compact('medidocDocumentGID', 'contentAsPdf'));
+        return Medidoc::call($this, \compact('medidocDocumentGID', 'contentAsPdf'));
     }
 }

@@ -22,7 +22,7 @@ class Medidoc
             ]);
     }
 
-    public function call(MedidocRequest $request, array $properties)
+    public function call(MedidocRequest $request, array $parameters)
     {
         // Anonymous class with all the props we need for the request.
         $requestInstance = new class(){};
@@ -32,11 +32,18 @@ class Medidoc
         $requestInstance->password = \config('medidoc.password');
 
         // Set passed properties.
-        foreach ($properties as $name => $value) {
+        foreach ($parameters as $name => $value) {
             $requestInstance->{$name} = $value;
         }
 
-        return $this->client->{$request->method()}($requestInstance);
+        // Call method, get response property and handle errors.
+        $response = $this->client->{$request->method()}($requestInstance)->{$request->responseProp()};
+
+        if ($response->ReturnStatus !== 1) {
+            throw new \Exception($response->ReturnMessage);
+        }
+
+        return $response;
     }
 
     public static function classmap(): array
