@@ -36,12 +36,12 @@ class Medidoc
             $requestInstance->{$name} = $value;
         }
 
-        // Call method, get response property and handle errors.
-        $response = $this->client->{$request->method()}($requestInstance)->{$request->responseProp()};
+        //ray($requestInstance);
 
-        if ($response->ReturnStatus !== 1) {
-            throw new \Exception($response->ReturnMessage);
-        }
+        // Call method, get response property and handle errors.
+        $response = $request->processResponse($this->client->{$request->method()}($requestInstance));
+
+        ray()->xml($this->client->__getLastResponse());
 
         return $response;
     }
@@ -50,13 +50,19 @@ class Medidoc
     {
         return [
             'CheckConnection' => Requests\CheckConnection::class,
-            'CheckConnectionResponse' => Responses\CheckConnectionResponse::class,
             'SendDocument' => Requests\SendDocument::class,
+            'SendDocumentResponse' => Responses\SendDocumentResponse::class,
+            'GetInsuranceList' => Requests\GetInsuranceList::class,
+            'InsuranceListResponse' => Responses\InsuranceListResponse::class,
+            'GetPersonOrOrganizationList' => Requests\GetPersonOrOrganizationList::class,
+            'PersonOrOrganizationListResponse' => Responses\PersonOrOrganizationListResponse::class,
+
+
+
             'DocumentData' => Entities\DocumentData::class,
             'PatientData' => Entities\PatientData::class,
             'ArrayOfNameValue' => Entities\ArrayOfNameValue::class,
             'NameValue' => Entities\NameValue::class,
-            'SendDocumentResponse' => Responses\SendDocumentResponse::class,
             'SendDocumentList' => Requests\SendDocumentList::class,
             'ArrayOfDocumentData' => Entities\ArrayOfDocumentData::class,
             'SendDocumentListResponse' => Responses\SendDocumentListResponse::class,
@@ -101,12 +107,8 @@ class Medidoc
             'GlnPartyData' => Entities\GlnPartyData::class,
             'SearchGlnPartyData' => Requests\SearchGlnPartyData::class,
             'SearchGlnPartyDataResponse' => Responses\SearchGlnPartyDataResponse::class,
-            'GetInsuranceList' => Requests\GetInsuranceList::class,
-            'InsuranceListResponse' => Responses\InsuranceListResponse::class,
             'ArrayOfInsuranceData' => Entities\ArrayOfInsuranceData::class,
             'InsuranceData' => Entities\InsuranceData::class,
-            'GetPersonOrOrganizationList' => Requests\GetPersonOrOrganizationList::class,
-            'PersonOrOrganizationListResponse' => Responses\PersonOrOrganizationListResponse::class,
             'ArrayOfPersonOrOrganization' => Entities\ArrayOfPersonOrOrganization::class,
             'PersonOrOrganization' => Entities\PersonOrOrganization::class,
             'ArrayOfCodeValue' => Entities\ArrayOfCodeValue::class,

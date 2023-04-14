@@ -12,6 +12,8 @@ use Smartprax\Medidoc\Responses\PersonOrOrganizationListResponse;
 
 /**
  * @see http://api.medidoc.ch/methods/getpersonororganizationlist/
+ *
+ * @method run(ArrayOfNameValue $filterParameters)
  */
 class GetPersonOrOrganizationList extends MedidocRequest
 {

@@ -13,7 +13,7 @@ use Smartprax\Medidoc\Entities\NameValue;
 /**
  * See http://api.medidoc.ch/methods/getinsurancelist/ for filter specs.
  *
- * @method run(ArrayOfNameValue $filterParameters)
+ * @method InsuranceListResponse run(ArrayOfNameValue $filterParameters)
  */
 class GetInsuranceList extends MedidocRequest
 {

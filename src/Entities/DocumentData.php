@@ -4,17 +4,24 @@ namespace Smartprax\Medidoc\Entities;
 
 class DocumentData
 {
+    public string $SenderGln;
+    public string $Password;
+
     public function __construct(
-        public string $SenderGln,
-        public string $Password,
-        public string $InvoiceID,
-        public string $ReceiverGln,
-        public PatientData $ReceiverPatient,
-        public string $Language,
-        public string $ContentFormat,
         public string $FileContent,
-        public ArrayOfNameValue $OptionalParameters,
+
+        public ?string $ReceiverGln = null,
+        public ?string $InvoiceID = null,
+        public ?PatientData $ReceiverPatient = null,
+        public ?ArrayOfNameValue $OptionalParameters = null,
+
+        public string $ContentFormat = 'XmlInvoiceV450',
+        public string $Language = 'de',
     )
     {
+        $this->SenderGln = \config('medidoc.gln');
+        $this->Password = \config('medidoc.password');
+
+        $this->FileContent = \base64_encode($this->FileContent);
     }
 }
