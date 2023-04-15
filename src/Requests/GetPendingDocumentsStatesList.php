@@ -3,11 +3,14 @@
 namespace Smartprax\Medidoc\Requests;
 
 use Smartprax\Medidoc\Facades\Medidoc;
-use Smartprax\Medidoc\Responses\GetPendingDocumentsStatesListResponse;
+use Smartprax\Medidoc\Responses\PendingDocumentsStatesResponse;
 
+/**
+ * @method PendingDocumentsStatesResponse run()
+ */
 class GetPendingDocumentsStatesList extends MedidocRequest
 {
-    public function handle() : GetPendingDocumentsStatesListResponse
+    public function handle() : PendingDocumentsStatesResponse
     {
         return Medidoc::call($this, []);
     }
