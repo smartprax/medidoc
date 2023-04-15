@@ -4,6 +4,7 @@ namespace Smartprax\Medidoc\Entities;
 
 class ArrayOfDocumentStatus
 {
-    public function __construct(public DocumentStatus $DocumentStatus)
+    /** @var DocumentStatus[] $DocumentStatus */
+    public function __construct(public array $DocumentStatus)
     {}
 }

@@ -20,7 +20,7 @@
             <file>tests/CheckConnectionTest.php</file>
             <file>tests/GetInsuranceListTest.php</file>
             <file>tests/GetPersonOrOrganizationListTest.php</file>
-            <file>tests/SendDocumentInvoiceTest.php</file>
+            <file>tests/DocumentInvoiceTests.php</file>
             <file>tests/GetPendingDocumentsStatesList.php</file>
         </testsuite>
     </testsuites>

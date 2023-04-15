@@ -13,5 +13,6 @@ class DocumentStatesResponse extends GenericResponse
         public string $AcknowledgmentToken,
         public ArrayOfDocumentStatus $DocumentStatesList,
     )
-    {}
+    {
+    }
 }

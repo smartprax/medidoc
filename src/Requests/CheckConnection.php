@@ -17,7 +17,6 @@ class CheckConnection extends MedidocRequest
 
     public function processResponse($response)
     {
-
         return $response->{$this->responseProp()};
     }
 

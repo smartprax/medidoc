@@ -2,7 +2,6 @@
 
 namespace Smartprax\Medidoc;
 
-use Smartprax\Medidoc\Requests\MedidocRequest;
 
 class Medidoc
 {
@@ -22,7 +21,7 @@ class Medidoc
             ]);
     }
 
-    public function call(MedidocRequest $request, array $parameters)
+    public function call(Requests\MedidocRequest $request, array $parameters)
     {
         // Anonymous class with all the props we need for the request.
         $requestInstance = new class(){};
@@ -39,57 +38,32 @@ class Medidoc
         //ray($requestInstance);
 
         // Call method, get response property and handle errors.
-        $response = $request->processResponse($this->client->{$request->method()}($requestInstance));
+        $response = $this->client->{$request->method()}($requestInstance);
 
-        ray()->xml($this->client->__getLastResponse());
+        //ray()->xml($this->client->__getLastRequest());
+        //ray()->xml($this->client->__getLastResponse());
 
-        return $response;
+        return $request->processResponse($response);
     }
 
     public static function classmap(): array
     {
         return [
-            'CheckConnection' => Requests\CheckConnection::class,
-            'SendDocument' => Requests\SendDocument::class,
+            'GenericResponse' => Responses\GenericResponse::class,
             'SendDocumentResponse' => Responses\SendDocumentResponse::class,
             'InsuranceListResponse' => Responses\InsuranceListResponse::class,
             'PersonOrOrganizationListResponse' => Responses\PersonOrOrganizationListResponse::class,
-
+            'DocumentStatesResponse' => Responses\DocumentStatesResponse::class,
 
             'DocumentData' => Entities\DocumentData::class,
             'PatientData' => Entities\PatientData::class,
             'ArrayOfNameValue' => Entities\ArrayOfNameValue::class,
             'NameValue' => Entities\NameValue::class,
-            'SendDocumentList' => Requests\SendDocumentList::class,
             'ArrayOfDocumentData' => Entities\ArrayOfDocumentData::class,
-            'SendDocumentListResponse' => Responses\SendDocumentListResponse::class,
-            'DocumentStatesResponse' => Responses\DocumentStatesResponse::class,
             'ArrayOfDocumentStatus' => Entities\ArrayOfDocumentStatus::class,
             'DocumentStatus' => Entities\DocumentStatus::class,
-            'PendingDocumentsStatesResponse' => Responses\PendingDocumentsStatesResponse::class,
             'ArrayOfDocumentStatesResponse' => Entities\ArrayOfDocumentStatesResponse::class,
-            'SendDocumentStatesAcknowledgement' => Requests\SendDocumentStatesAcknowledgement::class,
-            'SendDocumentStatesAcknowledgementResponse' => Responses\SendDocumentStatesAcknowledgementResponse::class,
-            'GenericResponse' => Responses\GenericResponse::class,
             'ArrayOfGuid' => Entities\ArrayOfGuid::class,
-            'ContentResponse' => Responses\ContentResponse::class,
-            'CancelDocument' => Requests\CancelDocument::class,
-            'CancelDocumentResponse' => Responses\CancelDocumentResponse::class,
-            'CancelDocumentByDocumentID' => Requests\CancelDocumentByDocumentID::class,
-            'CancelDocumentByDocumentIDResponse' => Responses\CancelDocumentByDocumentIDResponse::class,
-            'CompleteDocument' => Requests\CompleteDocument::class,
-            'CompleteDocumentResponse' => Responses\CompleteDocumentResponse::class,
-            'CompleteDocumentByDocumentID' => Requests\CompleteDocumentByDocumentID::class,
-            'CompleteDocumentByDocumentIDResponse' => Responses\CompleteDocumentByDocumentIDResponse::class,
-            'OrderPrintService' => Requests\OrderPrintService::class,
-            'Address' => Entities\Address::class,
-            'OrderPrintServiceResponse' => Responses\OrderPrintServiceResponse::class,
-            'OrderPrintServiceByDocumentID' => Requests\OrderPrintServiceByDocumentID::class,
-            'OrderPrintServiceByDocumentIDResponse' => Responses\OrderPrintServiceByDocumentIDResponse::class,
-            'AddressResponse' => Responses\AddressResponse::class,
-            'ArrayOfGlnPartyData' => Entities\ArrayOfGlnPartyData::class,
-            'SearchGlnPartyData' => Requests\SearchGlnPartyData::class,
-            'SearchGlnPartyDataResponse' => Responses\SearchGlnPartyDataResponse::class,
             'ArrayOfInsuranceData' => Entities\ArrayOfInsuranceData::class,
             'InsuranceData' => Entities\InsuranceData::class,
             'ArrayOfPersonOrOrganization' => Entities\ArrayOfPersonOrOrganization::class,
@@ -98,20 +72,33 @@ class Medidoc
             'CodeValue' => Entities\CodeValue::class,
             'PatientFullData' => Entities\PatientFullData::class,
             'ArrayOfString' => Entities\ArrayOfString::class,
-            'RemindersResponse' => Responses\RemindersResponse::class,
+            'Address' => Entities\Address::class,
+            'ArrayOfGlnPartyData' => Entities\ArrayOfGlnPartyData::class,
             'ArrayOfReminderInfo' => Entities\ArrayOfReminderInfo::class,
             'ReminderInfo' => Entities\ReminderInfo::class,
-            'SendReminderAcknowledgement' => Requests\SendReminderAcknowledgement::class,
-            'SendReminderAcknowledgementResponse' => Responses\SendReminderAcknowledgementResponse::class,
-            'NotificationsResponse' => Responses\NotificationsResponse::class,
             'ArrayOfNotificationInfo' => Entities\ArrayOfNotificationInfo::class,
             'NotificationInfo' => Entities\NotificationInfo::class,
             'NotificationReferenceInfo' => Entities\NotificationReferenceInfo::class,
-            'SendNotificationAcknowledgement' => Requests\SendNotificationAcknowledgement::class,
-            'SendNotificationAcknowledgementResponse' => Responses\SendNotificationAcknowledgementResponse::class,
-            'ConvertXmlToPdf' => Requests\ConvertXmlToPdf::class,
-            'ConvertXmlToPdfResponse' => Responses\ConvertXmlToPdfResponse::class,
-            'ProviderConfigurationResponse' => Responses\ProviderConfigurationResponse::class,
+
+            //'SendDocumentListResponse' => Responses\SendDocumentListResponse::class,
+            //'DocumentStatesResponse' => Responses\DocumentStatesResponse::class,
+            //'PendingDocumentsStatesResponse' => Responses\PendingDocumentsStatesResponse::class,
+            //'SendDocumentStatesAcknowledgementResponse' => Responses\SendDocumentStatesAcknowledgementResponse::class,
+            //'ContentResponse' => Responses\ContentResponse::class,
+            //'CancelDocumentResponse' => Responses\CancelDocumentResponse::class,
+            //'CancelDocumentByDocumentIDResponse' => Responses\CancelDocumentByDocumentIDResponse::class,
+            //'CompleteDocumentResponse' => Responses\CompleteDocumentResponse::class,
+            //'CompleteDocumentByDocumentIDResponse' => Responses\CompleteDocumentByDocumentIDResponse::class,
+            //'OrderPrintServiceResponse' => Responses\OrderPrintServiceResponse::class,
+            //'OrderPrintServiceByDocumentIDResponse' => Responses\OrderPrintServiceByDocumentIDResponse::class,
+            //'AddressResponse' => Responses\AddressResponse::class,
+            //'SearchGlnPartyDataResponse' => Responses\SearchGlnPartyDataResponse::class,
+            //'RemindersResponse' => Responses\RemindersResponse::class,
+            //'SendReminderAcknowledgementResponse' => Responses\SendReminderAcknowledgementResponse::class,
+            //'NotificationsResponse' => Responses\NotificationsResponse::class,
+            //'SendNotificationAcknowledgementResponse' => Responses\SendNotificationAcknowledgementResponse::class,
+            //'ConvertXmlToPdfResponse' => Responses\ConvertXmlToPdfResponse::class,
+            //'ProviderConfigurationResponse' => Responses\ProviderConfigurationResponse::class,
         ];
     }
 
