@@ -54,6 +54,7 @@ class Medidoc
             'InsuranceListResponse' => Responses\InsuranceListResponse::class,
             'PersonOrOrganizationListResponse' => Responses\PersonOrOrganizationListResponse::class,
             'DocumentStatesResponse' => Responses\DocumentStatesResponse::class,
+            'ContentResponse' => Responses\ContentResponse::class,
 
             'DocumentData' => Entities\DocumentData::class,
             'PatientData' => Entities\PatientData::class,

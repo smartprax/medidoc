@@ -32,12 +32,12 @@ abstract class MedidocRequest implements RequestInterface
     public function processResponse($response)
     {
 
-        //ray($response);
-        //ray(\get_class($response));
+        ray($response);
+        ray(\get_class($response));
 
         $result = $response->{$this->responseProp()};
 
-        //ray($result);
+        ray($result);
 
         if ($result->ReturnStatus !== 1) {
             throw new \Exception($result->ReturnMessage);

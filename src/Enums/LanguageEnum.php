@@ -8,9 +8,4 @@ enum LanguageEnum: string
     case fr = 'fr';
     case it = 'it';
     case en = 'en';
-
-    public function string() : string
-    {
-        return $this->value;
-    }
 }

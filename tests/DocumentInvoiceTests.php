@@ -4,8 +4,11 @@ use Smartprax\Medidoc\Entities\ArrayOfNameValue;
 use Smartprax\Medidoc\Entities\DocumentData;
 use Smartprax\Medidoc\Entities\NameValue;
 use Smartprax\Medidoc\Entities\PatientData;
+use Smartprax\Medidoc\Enums\ContentFormatEnum;
+use Smartprax\Medidoc\Requests\GetDocumentResponseContent;
 use Smartprax\Medidoc\Requests\GetDocumentStatesHistory;
 use Smartprax\Medidoc\Requests\SendDocument;
+use Smartprax\Medidoc\Responses\ContentResponse;
 use Smartprax\Medidoc\Responses\DocumentStatesResponse;
 use Smartprax\Medidoc\Responses\SendDocumentResponse;
 
@@ -32,7 +35,7 @@ test('Send Invoice.', function () {
                 new NameValue('PatientNoActionProcedureTG', '2'),
                 new NameValue('SendPatientCopy', '1')
             ]),
-            ContentFormat: 'XmlInvoiceV450',
+            ContentFormat: 'XmlInvoiceV450', // @see ContentFormatEnum.php keys
             Language: 'de'
         )
     );
@@ -53,3 +56,15 @@ test('Get Invoice States History.', function (string $DocumentGid) {
     return $DocumentGid;
 
 })->depends('Send Invoice.');
+
+
+test('Get Document Response Content.', function (string $DocumentGid) {
+
+    $response = GetDocumentResponseContent::run($DocumentGid, true);
+
+    expect($response)
+        ->toBeInstanceOf(ContentResponse::class);
+
+    return $DocumentGid;
+
+})->depends('Get Invoice States History.');
