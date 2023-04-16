@@ -3,6 +3,7 @@
 namespace Smartprax\Medidoc\Requests;
 
 use Smartprax\Medidoc\Facades\Medidoc;
+use Smartprax\Medidoc\Responses\ArrayOfDocumentsStatesResponse;
 use Smartprax\Medidoc\Responses\DocumentStatesResponse;
 
 /**
@@ -10,7 +11,7 @@ use Smartprax\Medidoc\Responses\DocumentStatesResponse;
  */
 class GetDocumentStatesHistory extends MedidocRequest
 {
-    public function handle(string $medidocDocumentGID) : DocumentStatesResponse
+    public function handle(string $medidocDocumentGID) : ArrayOfDocumentsStatesResponse
     {
         return Medidoc::call($this, compact('medidocDocumentGID'));
     }

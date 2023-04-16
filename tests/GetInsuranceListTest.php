@@ -12,5 +12,5 @@ test('Get Insurance List.', function () {
         GetInsuranceList::run(new ArrayOfNameValue([
             new NameValue('Canton', 'AG')
         ]))
-    )->toBeInstanceOf(InsuranceListResponse::class);
+    )->toBeArray();
 });

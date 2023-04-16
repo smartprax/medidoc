@@ -10,14 +10,9 @@ use Smartprax\Medidoc\Facades\Medidoc;
  */
 class CheckConnection extends MedidocRequest
 {
-    public function handle() : int
+    public function handle() : bool
     {
-        return Medidoc::call($this, []);
-    }
-
-    public function processResponse($response)
-    {
-        return $response->{$this->responseProp()};
+        return Medidoc::call($this, [])->CheckConnectionResult === 1;
     }
 
     public function asCommand(Command $command) : void
