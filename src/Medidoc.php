@@ -86,7 +86,6 @@ class Medidoc
             //'PendingDocumentsStatesResponse' => Responses\PendingDocumentsStatesResponse::class,
             //'SendDocumentStatesAcknowledgementResponse' => Responses\SendDocumentStatesAcknowledgementResponse::class,
             //'ContentResponse' => Responses\ContentResponse::class,
-            //'CancelDocumentResponse' => Responses\CancelDocumentResponse::class,
             //'CancelDocumentByDocumentIDResponse' => Responses\CancelDocumentByDocumentIDResponse::class,
             //'CompleteDocumentResponse' => Responses\CompleteDocumentResponse::class,
             //'CompleteDocumentByDocumentIDResponse' => Responses\CompleteDocumentByDocumentIDResponse::class,
