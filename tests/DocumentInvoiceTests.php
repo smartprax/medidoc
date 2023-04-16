@@ -60,7 +60,7 @@ test('Get Invoice States History.', function (string $DocumentGid) {
 
 test('Get Document Response Content.', function (string $DocumentGid) {
 
-    $response = GetDocumentResponseContent::run($DocumentGid, true);
+    $response = GetDocumentResponseContent::run($DocumentGid, false);
 
     expect($response)
         ->toBeInstanceOf(ContentResponse::class);
