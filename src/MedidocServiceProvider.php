@@ -2,9 +2,9 @@
 
 namespace Smartprax\Medidoc;
 
-use Smartprax\Medidoc\Requests\CheckConnection;
-use Smartprax\Medidoc\Requests\GetInsuranceList;
-use Smartprax\Medidoc\Requests\GetPersonOrOrganizationList;
+use Smartprax\Medidoc\Methods\CheckConnection;
+use Smartprax\Medidoc\Methods\GetInsuranceList;
+use Smartprax\Medidoc\Methods\GetPersonOrOrganizationList;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

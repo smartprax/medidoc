@@ -1,6 +1,6 @@
 <?php
 
-use Smartprax\Medidoc\Requests\CheckConnection;
+use Smartprax\Medidoc\Methods\CheckConnection;
 
 test('CheckConnection', function () {
     expect(CheckConnection::run())->toBeTrue();

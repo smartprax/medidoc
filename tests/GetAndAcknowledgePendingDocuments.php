@@ -1,7 +1,7 @@
 <?php
 
-use Smartprax\Medidoc\Requests\GetPendingDocumentsStatesList;
-use Smartprax\Medidoc\Requests\SendDocumentStatesAcknowledgement;
+use Smartprax\Medidoc\Methods\GetPendingDocumentsStatesList;
+use Smartprax\Medidoc\Methods\SendDocumentStatesAcknowledgement;
 use Smartprax\Medidoc\Responses\ArrayOfDocumentsStatesResponse;
 use Smartprax\Medidoc\Responses\GenericResponse;
 

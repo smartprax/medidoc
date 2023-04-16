@@ -24,7 +24,7 @@ class Medidoc
             ]);
     }
 
-    public function call(Requests\MedidocRequest $request, array $parameters) : stdClass
+    public function call(Methods\MedidocMethod $request, array $parameters) : stdClass
     {
         $request_data = [
             'gln' => \config('medidoc.gln'),

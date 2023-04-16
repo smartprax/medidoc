@@ -3,10 +3,10 @@
 namespace Smartprax\Medidoc\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Smartprax\Medidoc\Requests\MedidocRequest;
+use Smartprax\Medidoc\Methods\MedidocMethod;
 
 /**
- * @method static \stdClass call(MedidocRequest $method, array $parameters)
+ * @method static \stdClass call(MedidocMethod $method, array $parameters)
  */
 class Medidoc extends Facade
 {
