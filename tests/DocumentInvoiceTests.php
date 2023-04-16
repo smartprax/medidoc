@@ -4,9 +4,9 @@ use Smartprax\Medidoc\Entities\ArrayOfNameValue;
 use Smartprax\Medidoc\Entities\DocumentData;
 use Smartprax\Medidoc\Entities\NameValue;
 use Smartprax\Medidoc\Entities\PatientData;
-use Smartprax\Medidoc\Enums\ContentFormatEnum;
 use Smartprax\Medidoc\Requests\CancelDocument;
-use Smartprax\Medidoc\Requests\GetDocumentResponseContent;
+use Smartprax\Medidoc\Requests\CompleteDocument;
+use Smartprax\Medidoc\Requests\GetDocumentContent;
 use Smartprax\Medidoc\Requests\GetDocumentStatesHistory;
 use Smartprax\Medidoc\Requests\SendDocument;
 use Smartprax\Medidoc\Responses\ContentResponse;
@@ -48,36 +48,49 @@ test('Send Invoice.', function () {
     return $response->DocumentGID;
 });
 
-test('Get Invoice States History.', function (string $DocumentGid) {
+test('Get Invoice States History.', function (string $medidocDocumentGID) {
 
-    $response = GetDocumentStatesHistory::run($DocumentGid);
+    $response = GetDocumentStatesHistory::run($medidocDocumentGID);
 
     expect($response)
         ->toBeInstanceOf(DocumentStatesResponse::class);
 
-    return $DocumentGid;
+    return $medidocDocumentGID;
 
 })->depends('Send Invoice.');
 
 
-test('Get Document Response Content.', function (string $DocumentGid) {
 
-    $response = GetDocumentResponseContent::run($DocumentGid, false);
+test('Get Document Content.', function (string $medidocDocumentGID) {
+
+    $response = GetDocumentContent::run($medidocDocumentGID, false);
 
     expect($response)
         ->toBeInstanceOf(ContentResponse::class);
 
-    return $DocumentGid;
+    return $medidocDocumentGID;
 
 })->depends('Get Invoice States History.');
 
-test('Cancel Document.', function (string $medidocDocumentGID) {
+test('Complete Document.', function (string $medidocDocumentGID) {
 
-    $response = CancelDocument::run($medidocDocumentGID, false);
+    $response = CompleteDocument::run($medidocDocumentGID, now());
 
     expect($response)
         ->toBeInstanceOf(GenericResponse::class);
 
     return $medidocDocumentGID;
 
-})->depends('Get Document Response Content.');
+})->depends('Get Document Content.');
+
+
+test('Cancel Document.', function (string $medidocDocumentGID) {
+
+    $response = CancelDocument::run($medidocDocumentGID);
+
+    expect($response)
+        ->toBeInstanceOf(GenericResponse::class);
+
+    return $medidocDocumentGID;
+
+})->depends('Complete Document.');
