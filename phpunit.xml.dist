@@ -22,6 +22,7 @@
             <file>tests/GetPersonOrOrganizationListTest.php</file>
             <file>tests/DocumentInvoiceTests.php</file>
             <file>tests/GetPendingDocumentsStatesList.php</file>
+            <file>tests/GetAndAcknowledgePendingDocuments.php</file>
         </testsuite>
     </testsuites>
     <logging>
