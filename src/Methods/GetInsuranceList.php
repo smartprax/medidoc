@@ -4,6 +4,7 @@ namespace Smartprax\Medidoc\Methods;
 
 use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsCommand;
+use Smartprax\Medidoc\Entities\InsuranceListResponse;
 use Smartprax\Medidoc\Facades\Medidoc;
 use Smartprax\Medidoc\Entities\ArrayOfNameValue;
 use Smartprax\Medidoc\Entities\InsuranceData;
@@ -18,12 +19,37 @@ class GetInsuranceList extends MedidocMethod
 {
     use AsCommand;
 
-    public function handle(ArrayOfNameValue $filterParameters): array
+    public function handle(ArrayOfNameValue $filterParameters): InsuranceListResponse
     {
-        return Medidoc::call($this, \compact('filterParameters'))
+        $insurances = Medidoc::call($this, \compact('filterParameters'))
             ->GetInsuranceListResult
             ->AddressList
             ->InsuranceData;
+
+        return new InsuranceListResponse(
+            AddressList: \collect($insurances)
+                ->map(
+                    fn($insurance) => new InsuranceData(
+                        PartnerID: $insurance->PartnerID,
+                        Gln: $insurance->Gln,
+                        Organisation: $insurance->Organisation,
+                        Department: $insurance->Department,
+                        Street: $insurance->Street,
+                        Pobox: $insurance->Pobox,
+                        Zip: $insurance->Zip,
+                        City: $insurance->City,
+                        Canton: $insurance->Canton,
+                        Country: $insurance->Country,
+                        Phone: $insurance->Phone,
+                        Fax: $insurance->Fax,
+                        Url: $insurance->Url,
+                        Email: $insurance->Email,
+                        Bsv: $insurance->Bsv,
+                        GlnDestination: $insurance->GlnDestination,
+                        InsuranceType: $insurance->InsuranceType
+                    )
+                )
+        );
     }
 
     public function asCommand(Command $command): void

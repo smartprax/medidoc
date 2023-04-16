@@ -1,16 +1,19 @@
 <?php
 
 use Smartprax\Medidoc\Entities\ArrayOfNameValue;
+use Smartprax\Medidoc\Entities\InsuranceListResponse;
 use Smartprax\Medidoc\Entities\NameValue;
-use Smartprax\Medidoc\Methods\CheckConnection;
 use Smartprax\Medidoc\Methods\GetInsuranceList;
-use Smartprax\Medidoc\Responses\InsuranceListResponse;
 
-test('Get Insurance List.', function () {
+test('GetInsuranceList', function () {
 
-    expect(
-        GetInsuranceList::run(new ArrayOfNameValue([
-            new NameValue('Canton', 'AG')
-        ]))
-    )->toBeArray();
+    $response = GetInsuranceList::run(
+        new ArrayOfNameValue([
+                new NameValue('Canton', 'AG')
+            ]
+        )
+    );
+
+    expect($response)
+        ->toBeInstanceOf(InsuranceListResponse::class);
 });
