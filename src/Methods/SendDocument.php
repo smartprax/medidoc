@@ -2,9 +2,11 @@
 
 namespace Smartprax\Medidoc\Methods;
 
+use Carbon\Carbon;
 use Smartprax\Medidoc\Entities\DocumentData;
+use Smartprax\Medidoc\Entities\SendDocumentResponse;
+use Smartprax\Medidoc\Enums\DocumentStatusEnum;
 use Smartprax\Medidoc\Facades\Medidoc;
-use Smartprax\Medidoc\Responses\SendDocumentResponse;
 
 /**
  * @see http://api.medidoc.ch/methods/senddocument/
@@ -15,6 +17,14 @@ class SendDocument extends MedidocMethod
 {
     public function handle(DocumentData $documentData) : SendDocumentResponse
     {
-        return Medidoc::call($this, \compact('documentData'));
+        $sendDocumentResult = Medidoc::call($this, \compact('documentData'))->SendDocumentResult;
+
+        return new SendDocumentResponse(
+            FolderGID: $sendDocumentResult->FolderGID,
+            DocumentGID: $sendDocumentResult->DocumentGID,
+            DocumentID: $sendDocumentResult->DocumentID,
+            DocumentWorkflowStatus: DocumentStatusEnum::from($sendDocumentResult->DocumentWorkflowStatus),
+            UploadDateTime: new Carbon($sendDocumentResult->UploadDateTime)
+        );
     }
 }

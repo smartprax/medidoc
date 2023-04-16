@@ -8,13 +8,11 @@ use Illuminate\Support\Stringable;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Lorisleiva\Actions\Concerns\AsCommand;
 use Phpro\SoapClient\Type\RequestInterface;
-use Smartprax\Medidoc\HandleMediocResponse;
 
 abstract class MedidocMethod implements RequestInterface
 {
     use AsAction,
-        AsCommand,
-        HandleMediocResponse;
+        AsCommand;
 
     public function method(): string
     {

@@ -4,19 +4,20 @@ namespace Smartprax\Medidoc\Methods;
 
 use Carbon\Carbon;
 use Smartprax\Medidoc\Facades\Medidoc;
-use Smartprax\Medidoc\Responses\GenericResponse;
 
 /**
- * @method GenericResponse run(string $medidocDocumentGID, Carbon $completeDate)
+ * @method bool run(string $medidocDocumentGID, Carbon $completeDate)
  */
 class CompleteDocument extends MedidocMethod
 {
-    public function handle(string $medidocDocumentGID, Carbon $completeDate) : GenericResponse
+    public function handle(string $DocumentGID, Carbon $completeDate) : bool
     {
         return Medidoc::call($this, [
-            'medidocDocumentGID' => $medidocDocumentGID,
-            'completeDate' => $completeDate->toIso8601String(),
-        ]);
+                'medidocDocumentGID' => $DocumentGID,
+                'completeDate' => $completeDate->toIso8601String(),
+            ])
+                ->CompleteDocumentResult
+                ->ReturnStatus === 1;
     }
 
 }

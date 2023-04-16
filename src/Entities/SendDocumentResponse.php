@@ -5,12 +5,14 @@ namespace Smartprax\Medidoc\Entities;
 use Carbon\Carbon;
 use Smartprax\Medidoc\Enums\DocumentStatusEnum;
 
-class DocumentStatus
+class SendDocumentResponse
 {
     public function __construct(
-        public readonly Carbon $StatusChangeDate,
+        public readonly string $FolderGID,
+        public readonly string $DocumentGID,
+        public readonly int $DocumentID,
         public readonly DocumentStatusEnum $DocumentWorkflowStatus,
-        public readonly string $AdditionalInformation,
+        public readonly Carbon $UploadDateTime,
     )
     {
     }

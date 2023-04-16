@@ -2,7 +2,6 @@
 
 namespace Smartprax\Medidoc;
 
-
 use Smartprax\Medidoc\Enums\ReturnStatusEnum;
 use stdClass;
 
@@ -20,7 +19,6 @@ class Medidoc
                 'exceptions' => true,
                 'soap_version' => \SOAP_1_2,
                 'trace' => true,
-                'classmap' => self::classmap()
             ]);
     }
 
@@ -50,13 +48,6 @@ class Medidoc
         }
 
         return $response;
-    }
-
-    public static function classmap() : array
-    {
-        return [
-            'InsuranceData' => Entities\InsuranceData::class,
-        ];
     }
 
 
