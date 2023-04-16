@@ -4,6 +4,7 @@ namespace Smartprax\Medidoc;
 
 
 use Smartprax\Medidoc\Enums\ReturnStatusEnum;
+use stdClass;
 
 class Medidoc
 {
@@ -23,7 +24,7 @@ class Medidoc
             ]);
     }
 
-    public function call(Requests\MedidocRequest $request, array $parameters)
+    public function call(Requests\MedidocRequest $request, array $parameters) : stdClass
     {
         $request_data = [
             'gln' => \config('medidoc.gln'),
@@ -42,6 +43,8 @@ class Medidoc
         $xml->registerXPathNamespace('medidoc', "http://www.medidoc.ch/SoapWebService");
         $returnStatus = $xml->xpath('//medidoc:ReturnStatus');
 
+        // Unfortunately CheckConnection does not have a ReturnStatus element,
+        // So we need to make the check conditional.
         if (count($returnStatus) && (int) $returnStatus[0] !== 1) {
             throw new \Exception($xml->xpath('//medidoc::ReturnMessage')[0], ReturnStatusEnum::from($returnStatus[0]));
         }
