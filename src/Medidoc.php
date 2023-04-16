@@ -55,12 +55,14 @@ class Medidoc
             'PersonOrOrganizationListResponse' => Responses\PersonOrOrganizationListResponse::class,
             'DocumentStatesResponse' => Responses\DocumentStatesResponse::class,
             'ContentResponse' => Responses\ContentResponse::class,
+            'PendingDocumentsStatesResponse' => Responses\ArrayOfDocumentsStatesResponse::class,
 
             'DocumentData' => Entities\DocumentData::class,
             'PatientData' => Entities\PatientData::class,
             'ArrayOfNameValue' => Entities\ArrayOfNameValue::class,
             'NameValue' => Entities\NameValue::class,
-            'ArrayOfDocumentData' => Entities\ArrayOfDocumentData::class,
+
+            //'ArrayOfDocumentData' => Entities\ArrayOfDocumentData::class,
             'ArrayOfDocumentStatus' => Entities\ArrayOfDocumentStatus::class,
             'DocumentStatus' => Entities\DocumentStatus::class,
             'ArrayOfDocumentStatesResponse' => Entities\ArrayOfDocumentStatesResponse::class,
@@ -83,7 +85,7 @@ class Medidoc
 
             //'SendDocumentListResponse' => Responses\SendDocumentListResponse::class,
             //'DocumentStatesResponse' => Responses\DocumentStatesResponse::class,
-            //'PendingDocumentsStatesResponse' => Responses\PendingDocumentsStatesResponse::class,
+            //'ArrayOfDocumentsStatesResponse' => Responses\ArrayOfDocumentsStatesResponse::class,
             //'SendDocumentStatesAcknowledgementResponse' => Responses\SendDocumentStatesAcknowledgementResponse::class,
             //'ContentResponse' => Responses\ContentResponse::class,
             //'CancelDocumentByDocumentIDResponse' => Responses\CancelDocumentByDocumentIDResponse::class,

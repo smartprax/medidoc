@@ -32,8 +32,8 @@ abstract class MedidocRequest implements RequestInterface
     public function processResponse($response)
     {
 
-        //ray($response);
-        //ray(\get_class($response));
+        ray($response);
+        ray(\get_class($response));
 
         $result = $response->{$this->responseProp()};
 
