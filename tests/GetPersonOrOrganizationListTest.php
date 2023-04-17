@@ -2,14 +2,27 @@
 
 use Smartprax\Medidoc\Entities\ArrayOfNameValue;
 use Smartprax\Medidoc\Entities\NameValue;
+use Smartprax\Medidoc\Entities\PersonOrOrganizationListResponse;
 use Smartprax\Medidoc\Methods\GetPersonOrOrganizationList;
-use Smartprax\Medidoc\Responses\PersonOrOrganizationListResponse;
 
-test('Get Person Or Organization List', function () {
+test('Get By Canton Filter', function () {
 
-    expect(
-        GetPersonOrOrganizationList::run(new ArrayOfNameValue([
+    $response = GetPersonOrOrganizationList::run(
+        new ArrayOfNameValue([
             new NameValue('Canton', 'AG')
-        ]))
-    )->toBeInstanceOf(PersonOrOrganizationListResponse::class);
+        ])
+    );
+
+    expect($response)->toBeInstanceOf(PersonOrOrganizationListResponse::class);
+});
+
+test('Get By OrgRole Doctor ', function () {
+
+    $response = GetPersonOrOrganizationList::run(
+        new ArrayOfNameValue([
+            new NameValue('OrgRole', '110')
+        ])
+    );
+
+    expect($response)->toBeInstanceOf(PersonOrOrganizationListResponse::class);
 });

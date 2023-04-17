@@ -2,6 +2,8 @@
 
 namespace Smartprax\Medidoc\Entities;
 
+use Illuminate\Support\Collection;
+
 class PersonOrOrganization
 {
     public function __construct(
@@ -27,9 +29,15 @@ class PersonOrOrganization
         public string $KNumber,
         public int $OrgRole,
         public bool $IsActive,
-        public ArrayOfCodeValue $ImprovementList,
-        public ArrayOfCodeValue $SkillList,
-        public ArrayOfCodeValue $EmphaseList,
+
+        /** @var CodeValue[]|null $ImprovementList*/
+        public ?Collection $ImprovementList = null,
+
+        /** @var CodeValue[]|null $SkillList*/
+        public ?Collection $SkillList = null,
+
+        /** @var CodeValue[]|null $EmphaseList*/
+        public ?Collection $EmphaseList = null,
     )
     {}
 }
