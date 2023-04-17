@@ -2,17 +2,45 @@
 
 namespace Smartprax\Medidoc\Methods;
 
-use Smartprax\Medidoc\Entities\ArrayOfDocumentStatus;
+use Carbon\Carbon;
+use Smartprax\Medidoc\Entities\DocumentStatesResponse;
+use Smartprax\Medidoc\Entities\DocumentStatus;
+use Smartprax\Medidoc\Entities\PendingDocumentStatesResponse;
+use Smartprax\Medidoc\Enums\DocumentStatusEnum;
 use Smartprax\Medidoc\Facades\Medidoc;
-use Smartprax\Medidoc\Responses\ArrayOfDocumentsStatesResponse;
 
 /**
- * @method ArrayOfDocumentsStatesResponse run()
+ * @see http://api.medidoc.ch/methods/getpendingdocumentsstateslist/
+ *
+ * @method PendingDocumentStatesResponse run()
  */
 class GetPendingDocumentsStatesList extends MedidocMethod
 {
-    public function handle() : ArrayOfDocumentsStatesResponse
+    public function handle() : PendingDocumentStatesResponse
     {
-        return Medidoc::call($this, []);
+        $documentStatesResponses =  Medidoc::call($this, [])
+            ->GetPendingDocumentsStatesListResult
+            ->DocumentStatesResponseList
+            ->DocumentStatesResponse;
+
+        return new PendingDocumentStatesResponse(
+            DocumentStatesResponseList: \collect($documentStatesResponses)
+                ->map(
+                    fn(\stdClass $documentStateResponse) =>
+                    new DocumentStatesResponse(
+                        FolderGID: $documentStateResponse->FolderGID,
+                        DocumentGID: $documentStateResponse->DocumentGID,
+                        AcknowledgmentToken: $documentStateResponse->AcknowledgmentToken,
+                        DocumentStatesList: \collect($documentStateResponse->DocumentStatesList)->map(
+                            fn(\stdClass $documentStatus) => new DocumentStatus(
+                                StatusChangeDate: new Carbon($documentStatus->StatusChangeDate),
+                                DocumentWorkflowStatus: DocumentStatusEnum::from($documentStatus->DocumentWorkflowStatus),
+                                AdditionalInformation:  $documentStatus->AdditionalInformation,
+                            )
+                        )
+                    )
+                )
+        );
+
     }
 }

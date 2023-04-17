@@ -9,7 +9,6 @@ class DocumentStatesResponse
     public function __construct(
         public readonly string $FolderGID,
         public readonly string $DocumentGID,
-        public readonly string $DocumentID,
         public readonly string $AcknowledgmentToken,
 
         /** @var DocumentStatus[] */
