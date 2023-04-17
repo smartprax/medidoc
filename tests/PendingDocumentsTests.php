@@ -2,8 +2,6 @@
 
 use Smartprax\Medidoc\Methods\GetPendingDocumentsStatesList;
 use Smartprax\Medidoc\Methods\SendDocumentStatesAcknowledgement;
-use Smartprax\Medidoc\Responses\ArrayOfDocumentsStatesResponse;
-use Smartprax\Medidoc\Responses\GenericResponse;
 
 test('GetPendingDocumentsStatesList', function () {
 
