@@ -22,6 +22,9 @@ class Medidoc
             ]);
     }
 
+    /**
+     * @throws MedidocException
+     */
     public function call(Methods\MedidocMethod $request, array $parameters) : stdClass
     {
         $request_data = [
@@ -33,9 +36,6 @@ class Medidoc
         // Call method, get response property and handle errors.
         $response = $this->client->{$request->method()}($request_data);
 
-        ray()->xml($this->client->__getLastResponse());
-        \ray($response);
-
         // Error handling.
         $xml = new \SimpleXMLElement($this->client->__getLastResponse());
         $xml->registerXPathNamespace('medidoc', "http://www.medidoc.ch/SoapWebService");
@@ -44,7 +44,8 @@ class Medidoc
         // Unfortunately CheckConnection does not have a ReturnStatus element,
         // So we need to make the check conditional.
         if (count($returnStatus) && (int) $returnStatus[0] !== 1) {
-            throw new \Exception($xml->xpath('//medidoc::ReturnMessage')[0], ReturnStatusEnum::from($returnStatus[0]));
+
+            throw ReturnStatusEnum::exception((int) $returnStatus[0]);
         }
 
         return $response;

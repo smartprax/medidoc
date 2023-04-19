@@ -3,12 +3,13 @@
 namespace Smartprax\Medidoc\Methods;
 
 use Smartprax\Medidoc\Facades\Medidoc;
-use Smartprax\Medidoc\Responses\SendNotificationAcknowledgementResponse;
 
 class SendNotificationAcknowledgement extends MedidocMethod
 {
-    public function handle(string $token) : SendNotificationAcknowledgementResponse
+    public function handle(string $token) : bool
     {
-        return Medidoc::call($this, \compact('token'));
+        return Medidoc::call($this, \compact('token'))
+                ->SendNotificationAcknowledgementResult
+                ->ReturnStatus === 1;
     }
 }

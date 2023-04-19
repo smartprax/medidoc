@@ -2,6 +2,8 @@
 
 namespace Smartprax\Medidoc\Enums;
 
+use Smartprax\Medidoc\MedidocException;
+
 enum ReturnStatusEnum: int
 {
     case NotInitialized = 0;
@@ -21,4 +23,11 @@ enum ReturnStatusEnum: int
     case FeatureWillBeImplementedLater = 112;
     case DuplicateInvoice = 113;
     case ContentNotAvailable = 114;
+
+    public static function exception(int $ReturnStatus)
+    {
+        $status = self::from($ReturnStatus);
+
+        return new MedidocException($status->name, $status->value);
+    }
 }
