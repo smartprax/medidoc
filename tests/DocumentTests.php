@@ -7,6 +7,8 @@ use Smartprax\Medidoc\Entities\DocumentStatesResponse;
 use Smartprax\Medidoc\Entities\NameValue;
 use Smartprax\Medidoc\Entities\PatientData;
 use Smartprax\Medidoc\Entities\SendDocumentResponse;
+use Smartprax\Medidoc\Enums\ContentFormatEnum;
+use Smartprax\Medidoc\Enums\LanguageEnum;
 use Smartprax\Medidoc\Methods\CancelDocument;
 use Smartprax\Medidoc\Methods\CompleteDocument;
 use Smartprax\Medidoc\Methods\GetDocumentContent;
@@ -36,8 +38,8 @@ test('SendDocument', function () {
                 new NameValue('PatientNoActionProcedureTG', '2'),
                 new NameValue('SendPatientCopy', '1'),
             ]),
-            ContentFormat: 'XmlInvoiceV450', // @see ContentFormatEnum.php keys
-            Language: 'de'
+            ContentFormat: ContentFormatEnum::XmlInvoiceV450,
+            Language: LanguageEnum::de
         )
     );
 

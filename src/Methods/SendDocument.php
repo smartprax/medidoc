@@ -17,7 +17,10 @@ class SendDocument extends MedidocMethod
 {
     public function handle(DocumentData $documentData): SendDocumentResponse
     {
-        $sendDocumentResult = Medidoc::call($this, \compact('documentData'))->SendDocumentResult;
+        ray((array) $documentData);
+
+        $sendDocumentResult = Medidoc::call($this, \compact('documentData'))
+            ->SendDocumentResult;
 
         return new SendDocumentResponse(
             FolderGID: $sendDocumentResult->FolderGID,
