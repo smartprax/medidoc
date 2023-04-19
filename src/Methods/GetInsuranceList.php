@@ -21,6 +21,8 @@ class GetInsuranceList extends MedidocMethod
 
     public function handle(ArrayOfNameValue $filterParameters): InsuranceListResponse
     {
+        ray(\compact('filterParameters'));
+
         $insurances = Medidoc::call($this, \compact('filterParameters'))
             ->GetInsuranceListResult
             ->AddressList
