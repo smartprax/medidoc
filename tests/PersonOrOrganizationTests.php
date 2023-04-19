@@ -9,7 +9,7 @@ test('Get By Canton Filter', function () {
 
     $response = GetPersonOrOrganizationList::run(
         new ArrayOfNameValue([
-            new NameValue('Canton', 'AG')
+            new NameValue('Canton', 'AG'),
         ])
     );
 
@@ -20,7 +20,7 @@ test('Get By OrgRole Doctor ', function () {
 
     $response = GetPersonOrOrganizationList::run(
         new ArrayOfNameValue([
-            new NameValue('OrgRole', '110')
+            new NameValue('OrgRole', '110'),
         ])
     );
 

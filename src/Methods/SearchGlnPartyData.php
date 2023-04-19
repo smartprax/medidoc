@@ -18,8 +18,7 @@ class SearchGlnPartyData extends MedidocMethod
         string $city,
         string $canton,
         int $insuranceType
-    ) : SearchGlnPartyDataResponse
-    {
+    ): SearchGlnPartyDataResponse {
         return Medidoc::call($this, \compact('orgRole', 'ean', 'organisation', 'firstName', 'lastName', 'street', 'zipCode', 'city', 'canton', 'insuranceType'));
     }
 }

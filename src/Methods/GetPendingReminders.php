@@ -7,7 +7,7 @@ use Smartprax\Medidoc\Responses\GetPendingRemindersResponse;
 
 class GetPendingReminders extends MedidocMethod
 {
-    public function handle() : GetPendingRemindersResponse
+    public function handle(): GetPendingRemindersResponse
     {
         return Medidoc::call($this, []);
     }

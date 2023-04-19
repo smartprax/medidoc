@@ -10,12 +10,11 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class MedidocServiceProvider extends PackageServiceProvider
 {
-
     public function boot()
     {
         parent::boot();
 
-        $this->app->singleton(Medidoc::class, fn() => new Medidoc());
+        $this->app->singleton(Medidoc::class, fn () => new Medidoc());
     }
 
     public function configurePackage(Package $package): void

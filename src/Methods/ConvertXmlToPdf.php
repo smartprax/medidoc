@@ -7,9 +7,8 @@ use Smartprax\Medidoc\Responses\ConvertXmlToPdfResponse;
 
 class ConvertXmlToPdf extends MedidocMethod
 {
-    public function handle(string $xmlContent, string $contentFormat, bool $isPatientCopy) : ConvertXmlToPdfResponse
+    public function handle(string $xmlContent, string $contentFormat, bool $isPatientCopy): ConvertXmlToPdfResponse
     {
         return Medidoc::call($this, \compact('xmlContent', 'contentFormat', 'isPatientCopy'));
     }
-
 }

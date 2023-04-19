@@ -7,7 +7,6 @@ use Smartprax\Medidoc\Methods\SendNotificationAcknowledgement;
 
 test('GetPendingNotifications', function () {
 
-
     $response = GetPendingNotifications::run();
 
     expect($response)->toBeInstanceOf(NotificationsResponse::class);
@@ -26,7 +25,5 @@ test('SendNotificationAcknowledgement', function (NotificationsResponse $notific
             expect(SendNotificationAcknowledgement::run($notificationInfo->AcknowledgmentToken))->toBeTrue();
         });
     }
-
-
 
 })->depends('GetPendingNotifications');

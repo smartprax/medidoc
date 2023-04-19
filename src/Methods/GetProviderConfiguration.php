@@ -7,7 +7,7 @@ use Smartprax\Medidoc\Responses\GetProviderConfigurationResponse;
 
 class GetProviderConfiguration extends MedidocMethod
 {
-    public function handle() : GetProviderConfigurationResponse
+    public function handle(): GetProviderConfigurationResponse
     {
         return Medidoc::call($this, []);
     }

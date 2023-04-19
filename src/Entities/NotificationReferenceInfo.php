@@ -8,7 +8,6 @@ class NotificationReferenceInfo
         public int $Timestamp,
         public \DateTimeInterface $Date,
         public string $Id,
-    )
-    {
+    ) {
     }
 }

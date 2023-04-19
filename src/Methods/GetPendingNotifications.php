@@ -2,15 +2,11 @@
 
 namespace Smartprax\Medidoc\Methods;
 
-use Carbon\Carbon;
 use Carbon\CarbonImmutable;
-use Smartprax\Medidoc\Entities\DocumentStatesResponse;
-use Smartprax\Medidoc\Entities\DocumentStatus;
 use Smartprax\Medidoc\Entities\NotificationInfo;
 use Smartprax\Medidoc\Entities\NotificationReferenceInfo;
 use Smartprax\Medidoc\Entities\NotificationsResponse;
 use Smartprax\Medidoc\Entities\PendingDocumentStatesResponse;
-use Smartprax\Medidoc\Enums\DocumentStatusEnum;
 use Smartprax\Medidoc\Enums\ReturnStatusEnum;
 use Smartprax\Medidoc\Facades\Medidoc;
 use Smartprax\Medidoc\MedidocException;
@@ -22,11 +18,11 @@ use Smartprax\Medidoc\MedidocException;
  */
 class GetPendingNotifications extends MedidocMethod
 {
-    public function handle() : NotificationsResponse
+    public function handle(): NotificationsResponse
     {
         try {
 
-            $notifications =  Medidoc::call($this, [])
+            $notifications = Medidoc::call($this, [])
                 ->GetPendingNotificationsResult
                 ->Notifications;
 
@@ -41,8 +37,7 @@ class GetPendingNotifications extends MedidocMethod
         return new NotificationsResponse(
             Notifications: \collect($notifications)
                 ->map(
-                    fn(\stdClass $notification) =>
-                    new NotificationInfo(
+                    fn (\stdClass $notification) => new NotificationInfo(
                         FolderGID: $notification->FolderGID,
                         DocumentGID: $notification->DocumentGID,
                         SenderGln: $notification->SenderGLN,

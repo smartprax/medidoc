@@ -12,6 +12,6 @@ class ReminderInfo
         public float $ReminderAmount,
         public \DateTimeInterface $ReminderDate,
         public string $AcknowledgmentToken,
-    )
-    {}
+    ) {
+    }
 }

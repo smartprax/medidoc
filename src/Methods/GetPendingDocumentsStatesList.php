@@ -18,12 +18,12 @@ use Smartprax\Medidoc\MedidocException;
  */
 class GetPendingDocumentsStatesList extends MedidocMethod
 {
-    public function handle() : PendingDocumentStatesResponse
+    public function handle(): PendingDocumentStatesResponse
     {
 
         try {
 
-            $documentStatesResponses =  Medidoc::call($this, [])
+            $documentStatesResponses = Medidoc::call($this, [])
                 ->GetPendingDocumentsStatesListResult
                 ->DocumentStatesResponseList
                 ->DocumentStatesResponse ?? [];
@@ -39,16 +39,15 @@ class GetPendingDocumentsStatesList extends MedidocMethod
         return new PendingDocumentStatesResponse(
             DocumentStatesResponseList: \collect($documentStatesResponses)
                 ->map(
-                    fn(\stdClass $documentStateResponse) =>
-                    new DocumentStatesResponse(
+                    fn (\stdClass $documentStateResponse) => new DocumentStatesResponse(
                         FolderGID: $documentStateResponse->FolderGID,
                         DocumentGID: $documentStateResponse->DocumentGID,
                         AcknowledgmentToken: $documentStateResponse->AcknowledgmentToken,
                         DocumentStatesList: \collect($documentStateResponse->DocumentStatesList)->map(
-                            fn(\stdClass $documentStatus) => new DocumentStatus(
+                            fn (\stdClass $documentStatus) => new DocumentStatus(
                                 StatusChangeDate: new Carbon($documentStatus->StatusChangeDate),
                                 DocumentWorkflowStatus: DocumentStatusEnum::from($documentStatus->DocumentWorkflowStatus),
-                                AdditionalInformation:  $documentStatus->AdditionalInformation,
+                                AdditionalInformation: $documentStatus->AdditionalInformation,
                             )
                         )
                     )

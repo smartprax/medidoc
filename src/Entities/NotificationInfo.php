@@ -15,7 +15,6 @@ class NotificationInfo
         public readonly NotificationReferenceInfo $McdReference,
         public readonly NotificationReferenceInfo $FormReference,
         public readonly string $AcknowledgmentToken,
-    )
-    {
+    ) {
     }
 }

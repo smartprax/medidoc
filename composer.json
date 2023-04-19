@@ -25,7 +25,7 @@
     "ext-simplexml": "*"
   },
   "require-dev": {
-    "laravel/pint": "^1.0",
+    "laravel/pint": "^1.9",
     "nunomaduro/collision": "^7.9",
     "orchestra/testbench": "^8.0",
     "pestphp/pest": "^2.0",

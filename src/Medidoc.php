@@ -7,7 +7,6 @@ use stdClass;
 
 class Medidoc
 {
-
     public \SoapClient $client;
 
     public function __construct()
@@ -25,20 +24,19 @@ class Medidoc
     /**
      * @throws MedidocException
      */
-    public function call(Methods\MedidocMethod $request, array $parameters) : stdClass
+    public function call(Methods\MedidocMethod $request, array $parameters): stdClass
     {
-        $request_data = [
+
+        // Call method.
+        $response = $this->client->{$request->method()}([
             'gln' => \config('medidoc.gln'),
             'password' => \config('medidoc.password'),
-            ...$parameters
-        ];
-
-        // Call method, get response property and handle errors.
-        $response = $this->client->{$request->method()}($request_data);
+            ...$parameters,
+        ]);
 
         // Error handling.
         $xml = new \SimpleXMLElement($this->client->__getLastResponse());
-        $xml->registerXPathNamespace('medidoc', "http://www.medidoc.ch/SoapWebService");
+        $xml->registerXPathNamespace('medidoc', 'http://www.medidoc.ch/SoapWebService');
         $returnStatus = $xml->xpath('//medidoc:ReturnStatus');
 
         // Unfortunately CheckConnection does not have a ReturnStatus element,
@@ -50,6 +48,4 @@ class Medidoc
 
         return $response;
     }
-
-
 }

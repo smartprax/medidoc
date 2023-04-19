@@ -22,6 +22,6 @@ class InsuranceData
         public readonly string $Bsv,
         public readonly string $GlnDestination,
         public readonly string $InsuranceType,
-    )
-    {}
+    ) {
+    }
 }

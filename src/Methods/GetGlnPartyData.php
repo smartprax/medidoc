@@ -8,7 +8,7 @@ use Smartprax\Medidoc\Responses\GetGlnPartyDataResponse;
 
 class GetGlnPartyData extends MedidocMethod
 {
-    public function handle(ArrayOfNameValue $filterParameters) : GetGlnPartyDataResponse
+    public function handle(ArrayOfNameValue $filterParameters): GetGlnPartyDataResponse
     {
         return Medidoc::call($this, \compact('filterParameters'));
     }

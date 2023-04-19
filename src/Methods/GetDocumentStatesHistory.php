@@ -3,8 +3,8 @@
 namespace Smartprax\Medidoc\Methods;
 
 use Carbon\Carbon;
-use Smartprax\Medidoc\Entities\DocumentStatus;
 use Smartprax\Medidoc\Entities\DocumentStatesResponse;
+use Smartprax\Medidoc\Entities\DocumentStatus;
 use Smartprax\Medidoc\Enums\DocumentStatusEnum;
 use Smartprax\Medidoc\Facades\Medidoc;
 
@@ -13,7 +13,7 @@ use Smartprax\Medidoc\Facades\Medidoc;
  */
 class GetDocumentStatesHistory extends MedidocMethod
 {
-    public function handle(string $medidocDocumentGID) : DocumentStatesResponse
+    public function handle(string $medidocDocumentGID): DocumentStatesResponse
     {
         $response = Medidoc::call($this, compact('medidocDocumentGID'))
             ->GetDocumentStatesHistoryResult;
@@ -24,7 +24,7 @@ class GetDocumentStatesHistory extends MedidocMethod
             AcknowledgmentToken: $response->AcknowledgmentToken,
             DocumentStatesList: \collect($response->DocumentStatesList->DocumentStatus)
                 ->map(
-                    fn($documenStatus) => new DocumentStatus(
+                    fn ($documenStatus) => new DocumentStatus(
                         StatusChangeDate: new Carbon($documenStatus->StatusChangeDate),
                         DocumentWorkflowStatus: DocumentStatusEnum::from($documenStatus->DocumentWorkflowStatus),
                         AdditionalInformation: $documenStatus->AdditionalInformation

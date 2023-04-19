@@ -8,9 +8,8 @@ class PersonOrOrganizationListResponse
 {
     public function __construct(
 
-        /** @var PersonOrOrganization[]  */
+        /** @var PersonOrOrganization[] */
         public readonly Collection $AddressList
-    )
-    {
+    ) {
     }
 }

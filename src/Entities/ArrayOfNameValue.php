@@ -4,7 +4,8 @@ namespace Smartprax\Medidoc\Entities;
 
 class ArrayOfNameValue
 {
-    /** @var NameValue[] $NameValue */
+    /** @var NameValue[] */
     public function __construct(public array $NameValue)
-    {}
+    {
+    }
 }

@@ -7,7 +7,7 @@ use Smartprax\Medidoc\Responses\GetNewInsuranceAddressResponse;
 
 class GetNewInsuranceAddress extends MedidocMethod
 {
-    public function handle(string $medidocDocumentGID) : GetNewInsuranceAddressResponse
+    public function handle(string $medidocDocumentGID): GetNewInsuranceAddressResponse
     {
         return Medidoc::call($this, \compact('medidocDocumentGID'));
     }

@@ -4,9 +4,9 @@ use Smartprax\Medidoc\Entities\ArrayOfNameValue;
 use Smartprax\Medidoc\Entities\ContentResponse;
 use Smartprax\Medidoc\Entities\DocumentData;
 use Smartprax\Medidoc\Entities\DocumentStatesResponse;
-use Smartprax\Medidoc\Entities\SendDocumentResponse;
 use Smartprax\Medidoc\Entities\NameValue;
 use Smartprax\Medidoc\Entities\PatientData;
+use Smartprax\Medidoc\Entities\SendDocumentResponse;
 use Smartprax\Medidoc\Methods\CancelDocument;
 use Smartprax\Medidoc\Methods\CompleteDocument;
 use Smartprax\Medidoc\Methods\GetDocumentContent;
@@ -34,7 +34,7 @@ test('SendDocument', function () {
                 new NameValue('DeltaDaysBeforeActionTG', '31'),
                 new NameValue('PatientNoActionProcedure', '0'),
                 new NameValue('PatientNoActionProcedureTG', '2'),
-                new NameValue('SendPatientCopy', '1')
+                new NameValue('SendPatientCopy', '1'),
             ]),
             ContentFormat: 'XmlInvoiceV450', // @see ContentFormatEnum.php keys
             Language: 'de'
@@ -58,7 +58,6 @@ test('GetDocumentStatesHistory', function (string $DocumentGID) {
 
 })->depends('SendDocument');
 
-
 test('GetDocumentContent', function (string $DocumentGID) {
 
     $response = GetDocumentContent::run($DocumentGID, false);
@@ -70,7 +69,6 @@ test('GetDocumentContent', function (string $DocumentGID) {
 
 })->depends('GetDocumentStatesHistory');
 
-
 test('CompleteDocument', function (string $DocumentGID) {
 
     $response = CompleteDocument::run($DocumentGID, now());
@@ -81,7 +79,6 @@ test('CompleteDocument', function (string $DocumentGID) {
     return $DocumentGID;
 
 })->depends('GetDocumentContent');
-
 
 test('CancelDocument', function (string $DocumentGID) {
 

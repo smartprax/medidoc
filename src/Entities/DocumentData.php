@@ -8,6 +8,7 @@ use Smartprax\Medidoc\Enums\LanguageEnum;
 class DocumentData
 {
     public string $SenderGln;
+
     public string $Password;
 
     public function __construct(
@@ -20,8 +21,7 @@ class DocumentData
 
         public string $ContentFormat = 'XmlInvoiceV450',
         public string $Language = 'de',
-    )
-    {
+    ) {
         $this->SenderGln = \config('medidoc.gln');
         $this->Password = \config('medidoc.password');
 

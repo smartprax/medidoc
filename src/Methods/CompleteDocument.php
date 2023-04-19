@@ -10,14 +10,13 @@ use Smartprax\Medidoc\Facades\Medidoc;
  */
 class CompleteDocument extends MedidocMethod
 {
-    public function handle(string $DocumentGID, Carbon $completeDate) : bool
+    public function handle(string $DocumentGID, Carbon $completeDate): bool
     {
         return Medidoc::call($this, [
-                'medidocDocumentGID' => $DocumentGID,
-                'completeDate' => $completeDate->toIso8601String(),
-            ])
+            'medidocDocumentGID' => $DocumentGID,
+            'completeDate' => $completeDate->toIso8601String(),
+        ])
                 ->CompleteDocumentResult
                 ->ReturnStatus === 1;
     }
-
 }

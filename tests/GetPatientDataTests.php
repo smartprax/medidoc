@@ -8,7 +8,7 @@ use Smartprax\Medidoc\Methods\GetPatientDataByPatientIdentityDetails;
 
 test('Get PatientData by Firstname, Lastname & Birthday', function () {
 
-    $response = GetPatientDataByPatientIdentityDetails::run('Hans', 'Muster', new CarbonImmutable('1999-01-01'));
+    $response = GetPatientDataByPatientIdentityDetails::run('Hans', 'Muster', new CarbonImmutable('1999-01-01'), 'm');
 
     ray($response);
 
@@ -16,4 +16,3 @@ test('Get PatientData by Firstname, Lastname & Birthday', function () {
         ->toBeNull();
         //->toBeInstanceOf(PatientFullData::class);
 });
-

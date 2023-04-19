@@ -13,7 +13,6 @@ class DocumentStatesResponse
 
         /** @var DocumentStatus[] */
         public readonly Collection $DocumentStatesList
-    )
-    {
+    ) {
     }
 }

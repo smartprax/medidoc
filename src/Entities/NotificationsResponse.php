@@ -8,9 +8,8 @@ class NotificationsResponse
 {
     public function __construct(
 
-        /** @var NotificationInfo[]  */
+        /** @var NotificationInfo[] */
         public readonly Collection $Notifications
-    )
-    {
+    ) {
     }
 }

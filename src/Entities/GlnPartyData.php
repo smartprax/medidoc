@@ -28,7 +28,6 @@ class GlnPartyData
         public string $GlnDestination,
         public int $OrgRole,
         public int $InsuranceType,
-    )
-    {
+    ) {
     }
 }

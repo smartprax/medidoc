@@ -4,11 +4,11 @@ namespace Smartprax\Medidoc\Methods;
 
 use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsCommand;
-use Smartprax\Medidoc\Entities\InsuranceListResponse;
-use Smartprax\Medidoc\Facades\Medidoc;
 use Smartprax\Medidoc\Entities\ArrayOfNameValue;
 use Smartprax\Medidoc\Entities\InsuranceData;
+use Smartprax\Medidoc\Entities\InsuranceListResponse;
 use Smartprax\Medidoc\Entities\NameValue;
+use Smartprax\Medidoc\Facades\Medidoc;
 
 /**
  * See http://api.medidoc.ch/methods/getinsurancelist/ for filter specs.
@@ -29,7 +29,7 @@ class GetInsuranceList extends MedidocMethod
         return new InsuranceListResponse(
             AddressList: \collect($insurances)
                 ->map(
-                    fn($insurance) => new InsuranceData(
+                    fn ($insurance) => new InsuranceData(
                         PartnerID: $insurance->PartnerID,
                         Gln: $insurance->Gln,
                         Organisation: $insurance->Organisation,
@@ -63,7 +63,7 @@ class GetInsuranceList extends MedidocMethod
         $filter_value = $command->ask('Value?');
 
         $filters = new ArrayOfNameValue([
-            new NameValue($filter_name, $filter_value)
+            new NameValue($filter_name, $filter_value),
         ]);
 
         $insurances_list = $this->handle($filters);
@@ -72,7 +72,7 @@ class GetInsuranceList extends MedidocMethod
 
         $command->table(
             array_keys(get_object_vars($insurances_list[0])),
-            \array_map(fn(InsuranceData $insuranceData) => (array) $insuranceData, $insurances_list),
+            \array_map(fn (InsuranceData $insuranceData) => (array) $insuranceData, $insurances_list),
         );
 
     }

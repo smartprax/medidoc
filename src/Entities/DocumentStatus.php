@@ -11,7 +11,6 @@ class DocumentStatus
         public readonly Carbon $StatusChangeDate,
         public readonly DocumentStatusEnum $DocumentWorkflowStatus,
         public readonly string $AdditionalInformation,
-    )
-    {
+    ) {
     }
 }

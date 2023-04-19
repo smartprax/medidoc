@@ -8,6 +8,6 @@ class PatientData
         public string $AhvNumber,
         public string $MobilePhoneNumber,
         public string $Email,
-    )
-    {}
+    ) {
+    }
 }

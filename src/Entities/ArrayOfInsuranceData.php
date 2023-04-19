@@ -4,7 +4,8 @@ namespace Smartprax\Medidoc\Entities;
 
 class ArrayOfInsuranceData
 {
-    /** @var InsuranceData[] $InsuranceData */
+    /** @var InsuranceData[] */
     public function __construct(public array $InsuranceData)
-    {}
+    {
+    }
 }

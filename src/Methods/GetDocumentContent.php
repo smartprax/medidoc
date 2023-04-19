@@ -11,7 +11,7 @@ use Smartprax\Medidoc\Facades\Medidoc;
  */
 class GetDocumentContent extends MedidocMethod
 {
-    public function handle(string $medidocDocumentGID, bool $contentAsPdf) : ContentResponse
+    public function handle(string $medidocDocumentGID, bool $contentAsPdf): ContentResponse
     {
         $response = Medidoc::call($this, \compact('medidocDocumentGID', 'contentAsPdf'))
             ->GetDocumentContentResult;

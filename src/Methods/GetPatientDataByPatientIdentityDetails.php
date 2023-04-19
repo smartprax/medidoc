@@ -17,11 +17,10 @@ class GetPatientDataByPatientIdentityDetails extends MedidocMethod
         string $patientFirstname,
         string $patientLastname,
         CarbonImmutable $patientBirthday,
-        ?string $patientGender = null,
+        string $patientGender,
         ?CarbonImmutable $treatmentDate = null,
         ?int $zipCode = null
-    ) : ?PatientFullData
-    {
+    ): ?PatientFullData {
         $patientBirthday = $patientBirthday->toDateTimeLocalString();
         $treatmentDate = ($treatmentDate ?? now()->startOfDay())->toDateTimeLocalString();
 

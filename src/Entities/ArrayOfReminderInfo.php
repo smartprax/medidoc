@@ -4,7 +4,8 @@ namespace Smartprax\Medidoc\Entities;
 
 class ArrayOfReminderInfo
 {
-    /** @var ReminderInfo[] $ReminderInfo */
+    /** @var ReminderInfo[] */
     public function __construct(public array $ReminderInfo)
-    {}
+    {
+    }
 }

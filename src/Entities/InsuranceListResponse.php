@@ -8,9 +8,8 @@ class InsuranceListResponse
 {
     public function __construct(
 
-        /** @var InsuranceData[]  */
+        /** @var InsuranceData[] */
         public readonly Collection $AddressList
-    )
-    {
+    ) {
     }
 }

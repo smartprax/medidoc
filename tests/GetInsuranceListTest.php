@@ -9,8 +9,8 @@ test('GetInsuranceList', function () {
 
     $response = GetInsuranceList::run(
         new ArrayOfNameValue([
-                new NameValue('Canton', 'AG')
-            ]
+            new NameValue('Canton', 'AG'),
+        ]
         )
     );
 

@@ -13,7 +13,6 @@ class SendDocumentResponse
         public readonly int $DocumentID,
         public readonly DocumentStatusEnum $DocumentWorkflowStatus,
         public readonly Carbon $UploadDateTime,
-    )
-    {
+    ) {
     }
 }

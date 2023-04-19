@@ -55,7 +55,6 @@ class PatientFullData
         public readonly string $VvgProduct6,
         public readonly string $VvgProduct7,
         public readonly string $VvgProduct8,
-    )
-    {
+    ) {
     }
 }

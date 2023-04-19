@@ -30,14 +30,14 @@ class PersonOrOrganization
         public int $OrgRole,
         public bool $IsActive,
 
-        /** @var CodeValue[]|null $ImprovementList*/
+        /** @var CodeValue[]|null $ImprovementList */
         public ?Collection $ImprovementList = null,
 
-        /** @var CodeValue[]|null $SkillList*/
+        /** @var CodeValue[]|null $SkillList */
         public ?Collection $SkillList = null,
 
-        /** @var CodeValue[]|null $EmphaseList*/
+        /** @var CodeValue[]|null $EmphaseList */
         public ?Collection $EmphaseList = null,
-    )
-    {}
+    ) {
+    }
 }

@@ -10,7 +10,6 @@ class PendingDocumentStatesResponse
 
         /** @var DocumentStatesResponse[] $DocumentStatesResponseList */
         public readonly Collection $DocumentStatesResponseList
-    )
-    {
+    ) {
     }
 }

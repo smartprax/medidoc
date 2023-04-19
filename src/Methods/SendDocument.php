@@ -15,7 +15,7 @@ use Smartprax\Medidoc\Facades\Medidoc;
  */
 class SendDocument extends MedidocMethod
 {
-    public function handle(DocumentData $documentData) : SendDocumentResponse
+    public function handle(DocumentData $documentData): SendDocumentResponse
     {
         $sendDocumentResult = Medidoc::call($this, \compact('documentData'))->SendDocumentResult;
 

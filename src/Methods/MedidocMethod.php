@@ -29,7 +29,7 @@ abstract class MedidocMethod
             ->toString();
     }
 
-    private function className() : Stringable
+    private function className(): Stringable
     {
         return Str::of(get_class($this))
             ->replace('\\', '/')
@@ -39,5 +39,4 @@ abstract class MedidocMethod
     public function asCommand(Command $command): void
     {
     }
-
 }

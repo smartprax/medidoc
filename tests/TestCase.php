@@ -7,7 +7,6 @@ use Smartprax\Medidoc\MedidocServiceProvider;
 
 class TestCase extends Orchestra
 {
-
     protected function getPackageProviders($app)
     {
         return [

@@ -7,7 +7,7 @@ use Smartprax\Medidoc\Responses\GetDocumentStatesResponse;
 
 class GetDocumentStates extends MedidocMethod
 {
-    public function handle(string $medidocDocumentGID) : GetDocumentStatesResponse
+    public function handle(string $medidocDocumentGID): GetDocumentStatesResponse
     {
         return Medidoc::call($this, \compact('medidocDocumentGID'));
     }

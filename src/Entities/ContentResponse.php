@@ -11,7 +11,6 @@ class ContentResponse
         public readonly string $DocumentGID,
         public readonly string $DocumentContent,
         public readonly ContentFormatEnum $FileType,
-    )
-    {
+    ) {
     }
 }

@@ -18,7 +18,7 @@ use Smartprax\Medidoc\Facades\Medidoc;
  */
 class GetPersonOrOrganizationList extends MedidocMethod
 {
-    public function handle(ArrayOfNameValue $filterParameters) : PersonOrOrganizationListResponse
+    public function handle(ArrayOfNameValue $filterParameters): PersonOrOrganizationListResponse
     {
         $personsOrOrganizations = Medidoc::call($this, compact('filterParameters'))
             ->GetPersonOrOrganizationListResult
@@ -27,7 +27,7 @@ class GetPersonOrOrganizationList extends MedidocMethod
 
         return new PersonOrOrganizationListResponse(AddressList: \collect($personsOrOrganizations)
             ->map(
-                fn($personOrOrganization) => new PersonOrOrganization(
+                fn ($personOrOrganization) => new PersonOrOrganization(
                     PartnerID: $personOrOrganization->PartnerID,
                     Gln: $personOrOrganization->Gln,
                     Organisation: $personOrOrganization->Organisation,
@@ -58,7 +58,7 @@ class GetPersonOrOrganizationList extends MedidocMethod
         );
     }
 
-    private function getCodeValues(\stdClass $listObj, string $property) : ?Collection
+    private function getCodeValues(\stdClass $listObj, string $property): ?Collection
     {
 
         if (! isset($listObj->$property)) {
@@ -91,16 +91,15 @@ class GetPersonOrOrganizationList extends MedidocMethod
         $filter_value = $command->ask('Value?');
 
         $filters = new ArrayOfNameValue([
-            new NameValue($filter_name, $filter_value)
+            new NameValue($filter_name, $filter_value),
         ]);
 
         $response = $this->handle($filters);
 
         $command->table(
             array_keys(get_object_vars($response->AddressList->PersonOrOrganization[0])),
-            \array_map(fn(PersonOrOrganization $personOrOrganization) => (array) $personOrOrganization, $response->AddressList->PersonOrOrganization),
+            \array_map(fn (PersonOrOrganization $personOrOrganization) => (array) $personOrOrganization, $response->AddressList->PersonOrOrganization),
         );
 
     }
-
 }
