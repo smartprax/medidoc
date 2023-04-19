@@ -17,8 +17,6 @@ class SendDocument extends MedidocMethod
 {
     public function handle(DocumentData $documentData): SendDocumentResponse
     {
-        ray((array) $documentData);
-
         $sendDocumentResult = Medidoc::call($this, \compact('documentData'))
             ->SendDocumentResult;
 
