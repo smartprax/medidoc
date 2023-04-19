@@ -7,9 +7,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Lorisleiva\Actions\Concerns\AsCommand;
-use Phpro\SoapClient\Type\RequestInterface;
 
-abstract class MedidocMethod implements RequestInterface
+abstract class MedidocMethod
 {
     use AsAction,
         AsCommand;
