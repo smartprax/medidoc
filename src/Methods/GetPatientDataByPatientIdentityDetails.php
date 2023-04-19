@@ -29,8 +29,6 @@ class GetPatientDataByPatientIdentityDetails extends MedidocMethod
             \compact('patientFirstname', 'patientLastname', 'patientBirthday', 'patientGender', 'treatmentDate', 'zipCode')
         )->GetPatientDataByPatientIdentityDetailsResult;
 
-        ray($patientData);
-
         if ($patientData->ReturnValue !== 0) {
             return null;
         }
