@@ -23,6 +23,7 @@
             <file>tests/DocumentTests.php</file>
             <file>tests/PendingDocumentsTests.php</file>
             <file>tests/PendingNotificationsTests.php</file>
+            <file>tests/GetPatientDataTests.php</file>
         </testsuite>
     </testsuites>
     <logging>

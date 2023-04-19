@@ -3,7 +3,6 @@
 namespace Smartprax\Medidoc\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Smartprax\Medidoc\MedidocException;
 use Smartprax\Medidoc\Methods\MedidocMethod;
 
 /**
