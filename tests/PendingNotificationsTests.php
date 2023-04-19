@@ -17,8 +17,16 @@ test('GetPendingNotifications', function () {
 
 test('SendNotificationAcknowledgement', function (NotificationsResponse $notificationsResponse) {
 
-    $notificationsResponse->Notifications->each(function (NotificationInfo $notificationInfo) {
-        expect(SendNotificationAcknowledgement::run($notificationInfo->AcknowledgmentToken))->toBeTrue();
-    });
+    if ($notificationsResponse->Notifications->count() === 0) {
+
+        // Bogus assertion when there are no notifications.
+        expect($notificationsResponse->Notifications)->toHaveCount(0);
+    } else {
+        $notificationsResponse->Notifications->each(function (NotificationInfo $notificationInfo) {
+            expect(SendNotificationAcknowledgement::run($notificationInfo->AcknowledgmentToken))->toBeTrue();
+        });
+    }
+
+
 
 })->depends('GetPendingNotifications');

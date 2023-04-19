@@ -26,18 +26,15 @@ class GetPendingDocumentsStatesList extends MedidocMethod
             $documentStatesResponses =  Medidoc::call($this, [])
                 ->GetPendingDocumentsStatesListResult
                 ->DocumentStatesResponseList
-                ->DocumentStatesResponse;
+                ->DocumentStatesResponse ?? [];
 
         } catch (MedidocException $e) {
 
-            if($e->getCode() === ReturnStatusEnum::NoPendingDocumentFound) {
-                $documentStatesResponses = [];
-            } else {
-                throw $e;
-            }
+            match ($e->getCode()) {
+                ReturnStatusEnum::NoPendingDocumentFound->value => $documentStatesResponses = [],
+                default => throw $e
+            };
         }
-
-
 
         return new PendingDocumentStatesResponse(
             DocumentStatesResponseList: \collect($documentStatesResponses)

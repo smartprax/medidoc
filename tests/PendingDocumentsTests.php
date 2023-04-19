@@ -16,8 +16,17 @@ test('GetPendingDocumentsStatesList', function () {
 
 test('SendDocumentStatesAcknowledgement', function (PendingDocumentStatesResponse $documentsStatesResponse) {
 
-    $documentsStatesResponse->DocumentStatesResponseList->each(function (DocumentStatesResponse $documentStatesResponse) {
-        expect(SendDocumentStatesAcknowledgement::run($documentStatesResponse->AcknowledgmentToken))->toBeTrue();
-    });
+    if ($documentsStatesResponse->DocumentStatesResponseList->count() === 0) {
+
+        // Bogus assertion when there are no document states.
+        expect($documentsStatesResponse->DocumentStatesResponseList)->toHaveCount(0);
+    } else {
+
+        $documentsStatesResponse->DocumentStatesResponseList->each(function (
+            DocumentStatesResponse $documentStatesResponse
+        ) {
+            expect(SendDocumentStatesAcknowledgement::run($documentStatesResponse->AcknowledgmentToken))->toBeTrue();
+        });
+    }
 
 })->depends('GetPendingDocumentsStatesList');

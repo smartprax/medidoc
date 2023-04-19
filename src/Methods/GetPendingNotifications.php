@@ -32,13 +32,10 @@ class GetPendingNotifications extends MedidocMethod
 
         } catch (MedidocException $e) {
 
-            ray($e);
-
-            if($e->getCode() === ReturnStatusEnum::NoPendingDocumentFound->value) {
-                $notifications = [];
-            } else {
-                throw $e;
-            }
+            match ($e->getCode()) {
+                ReturnStatusEnum::NoPendingDocumentFound->value => $notifications = [],
+                default => throw $e
+            };
         }
 
         return new NotificationsResponse(

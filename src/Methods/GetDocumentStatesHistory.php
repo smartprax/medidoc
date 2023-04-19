@@ -21,7 +21,6 @@ class GetDocumentStatesHistory extends MedidocMethod
         return new DocumentStatesResponse(
             FolderGID: $response->FolderGID,
             DocumentGID: $response->DocumentGID,
-            DocumentID:  $response->DocumentID,
             AcknowledgmentToken: $response->AcknowledgmentToken,
             DocumentStatesList: \collect($response->DocumentStatesList->DocumentStatus)
                 ->map(
