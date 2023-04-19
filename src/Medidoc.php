@@ -9,6 +9,9 @@ class Medidoc
 {
     public \SoapClient $client;
 
+    /**
+     * @throws \SoapFault
+     */
     public function __construct()
     {
         $this->client = new \SoapClient(
@@ -23,10 +26,10 @@ class Medidoc
 
     /**
      * @throws MedidocException
+     * @throws \Exception
      */
     public function call(Methods\MedidocMethod $request, array $parameters): stdClass
     {
-
         // Call method.
         $response = $this->client->{$request->method()}([
             'gln' => \config('medidoc.gln'),
@@ -43,7 +46,9 @@ class Medidoc
         // So we need to make the check conditional.
         if (count($returnStatus) && (int) $returnStatus[0] !== 1) {
 
-            throw ReturnStatusEnum::exception((int) $returnStatus[0]);
+            $status = ReturnStatusEnum::from((int) $returnStatus[0]);
+
+            throw new MedidocException($status->name, $status->value);
         }
 
         return $response;
