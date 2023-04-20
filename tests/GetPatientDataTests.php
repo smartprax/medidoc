@@ -12,8 +12,6 @@ test('Get PatientData by Firstname, Lastname & Birthday', function () {
 
     $response = GetPatientDataByPatientIdentityDetails::run('Hans', 'Muster', new CarbonImmutable('1999-01-01'), 'm');
 
-    ray($response);
-
     expect($response)
         ->toBeNull();
         //->toBeInstanceOf(PatientFullData::class);
