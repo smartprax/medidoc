@@ -24,7 +24,7 @@
             <file>tests/PendingDocumentsTests.php</file>
             <file>tests/PendingNotificationsTests.php</file>
             <file>tests/GetPatientDataTests.php</file>
-            <file>tests/ConvertXmlToPdf.php</file>
+            <file>tests/ConvertXmlToPdfTest.php</file>
         </testsuite>
     </testsuites>
     <logging>
