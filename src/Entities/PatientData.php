@@ -5,9 +5,9 @@ namespace Smartprax\Medidoc\Entities;
 class PatientData
 {
     public function __construct(
-        public string $AhvNumber,
-        public string $MobilePhoneNumber,
-        public string $Email,
+        public readonly string $AhvNumber,
+        public readonly string $MobilePhoneNumber,
+        public readonly string $Email,
     ) {
     }
 }

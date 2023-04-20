@@ -2,12 +2,14 @@
 
 namespace Smartprax\Medidoc\Entities;
 
+use Carbon\CarbonImmutable;
+
 class NotificationReferenceInfo
 {
     public function __construct(
-        public int $Timestamp,
-        public \DateTimeInterface $Date,
-        public string $Id,
+        public readonly int $Timestamp,
+        public readonly CarbonImmutable $Date,
+        public readonly string $Id,
     ) {
     }
 }

@@ -7,37 +7,37 @@ use Illuminate\Support\Collection;
 class PersonOrOrganization
 {
     public function __construct(
-        public int $PartnerID,
-        public string $Gln,
-        public string $Organisation,
-        public string $Department,
-        public string $Title,
-        public string $Salutation,
-        public string $FirstName,
-        public string $LastName,
-        public string $Street,
-        public string $Pobox,
-        public int $Zip,
-        public string $City,
-        public string $Canton,
-        public string $Country,
-        public string $Phone,
-        public string $Fax,
-        public string $Url,
-        public string $Email,
-        public string $Zsr,
-        public string $KNumber,
-        public int $OrgRole,
-        public bool $IsActive,
+        public readonly int $PartnerID,
+        public readonly string $Gln,
+        public readonly string $Organisation,
+        public readonly string $Department,
+        public readonly string $Title,
+        public readonly string $Salutation,
+        public readonly string $FirstName,
+        public readonly string $LastName,
+        public readonly string $Street,
+        public readonly string $Pobox,
+        public readonly int $Zip,
+        public readonly string $City,
+        public readonly string $Canton,
+        public readonly string $Country,
+        public readonly string $Phone,
+        public readonly string $Fax,
+        public readonly string $Url,
+        public readonly string $Email,
+        public readonly string $Zsr,
+        public readonly string $KNumber,
+        public readonly int $OrgRole,
+        public readonly bool $IsActive,
 
         /** @var CodeValue[]|null $ImprovementList */
-        public ?Collection $ImprovementList = null,
+        public readonly ?Collection $ImprovementList = null,
 
         /** @var CodeValue[]|null $SkillList */
-        public ?Collection $SkillList = null,
+        public readonly ?Collection $SkillList = null,
 
         /** @var CodeValue[]|null $EmphaseList */
-        public ?Collection $EmphaseList = null,
+        public readonly ?Collection $EmphaseList = null,
     ) {
     }
 }

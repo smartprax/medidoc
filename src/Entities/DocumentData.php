@@ -16,10 +16,10 @@ class DocumentData
     public function __construct(
         public string $FileContent,
 
-        public ?string $ReceiverGln = null,
-        public ?string $InvoiceID = null,
-        public ?PatientData $ReceiverPatient = null,
-        public ?ArrayOfNameValue $OptionalParameters = null,
+        public readonly ?string $ReceiverGln = null,
+        public readonly ?string $InvoiceID = null,
+        public readonly ?PatientData $ReceiverPatient = null,
+        public readonly ?ArrayOfNameValue $OptionalParameters = null,
 
         ContentFormatEnum $ContentFormat = ContentFormatEnum::XmlInvoiceV450,
         LanguageEnum $Language = LanguageEnum::de,
