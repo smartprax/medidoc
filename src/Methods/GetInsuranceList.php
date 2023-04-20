@@ -23,8 +23,6 @@ class GetInsuranceList extends MedidocMethod
 
     public function handle(ArrayOfNameValue $filterParameters): InsuranceListResponse
     {
-        ray(\compact('filterParameters'));
-
         $insurances = Medidoc::call($this, \compact('filterParameters'))
             ->GetInsuranceListResult
             ->AddressList
@@ -70,13 +68,13 @@ class GetInsuranceList extends MedidocMethod
             new NameValue($filter_name, $filter_value),
         ]);
 
-        $insurances_list = $this->handle($filters);
+        $insuranceListResponse = $this->handle($filters);
 
-        ray(array_keys(get_object_vars($insurances_list[0])));
+        ray($insuranceListResponse);
 
         $command->table(
-            array_keys(get_object_vars($insurances_list[0])),
-            \array_map(fn (InsuranceData $insuranceData) => (array) $insuranceData, $insurances_list),
+            array_keys(get_object_vars($insuranceListResponse->AddressList[0])),
+            $insuranceListResponse->AddressList->map(fn (InsuranceData $insuranceData) => (array) $insuranceData)->toArray(),
         );
 
     }
