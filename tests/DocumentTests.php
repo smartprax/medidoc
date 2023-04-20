@@ -76,6 +76,19 @@ test('GetDocumentContent', function (string $DocumentGID) {
 
 })->depends('GetDocumentStatesHistory');
 
+test('GetDocumentResponseContent', function (string $DocumentGID) {
+
+    $response = GetDocumentContent::run($DocumentGID, false);
+
+    ray()->xml($response->DocumentContent);
+
+    expect($response)
+        ->toBeInstanceOf(ContentResponse::class);
+
+    return $DocumentGID;
+
+})->depends('GetDocumentStatesHistory');
+
 test('CompleteDocument', function (string $DocumentGID) {
 
     $response = CompleteDocument::run($DocumentGID, now()->toImmutable());
