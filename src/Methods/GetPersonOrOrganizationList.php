@@ -96,11 +96,11 @@ class GetPersonOrOrganizationList extends MedidocMethod
             new NameValue($filter_name, $filter_value),
         ]);
 
-        $response = $this->handle($filters);
+        $personOrOrganizationListResponse = $this->handle($filters);
 
         $command->table(
-            array_keys(get_object_vars($response->AddressList->PersonOrOrganization[0])),
-            \array_map(fn (PersonOrOrganization $personOrOrganization) => (array) $personOrOrganization, $response->AddressList->PersonOrOrganization),
+            array_keys(get_object_vars($personOrOrganizationListResponse->AddressList[0])),
+            $personOrOrganizationListResponse->AddressList->map(fn(PersonOrOrganization $personOrOrganization) => (array) $personOrOrganization),
         );
 
     }
