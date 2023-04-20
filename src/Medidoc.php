@@ -42,7 +42,7 @@ class Medidoc
         $xml->registerXPathNamespace('medidoc', 'http://www.medidoc.ch/SoapWebService');
         $returnStatus = $xml->xpath('//medidoc:ReturnStatus');
 
-        \ray()->xml($this->client->__getLastRequest());
+        //\ray()->xml($this->client->__getLastRequest());
 
         // Unfortunately CheckConnection does not have a ReturnStatus element,
         // So we need to make the check conditional.
