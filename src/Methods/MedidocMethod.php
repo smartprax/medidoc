@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Smartprax\Medidoc\Methods;
 
-use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -38,7 +37,4 @@ abstract class MedidocMethod
             ->basename();
     }
 
-    public function asCommand(Command $command): void
-    {
-    }
 }

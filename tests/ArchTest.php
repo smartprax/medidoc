@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-it('will not use debugging functions')
+test('No debugging functions used.')
     ->expect(['dd', 'dump', 'ray'])
     ->each->not->toBeUsed();

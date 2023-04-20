@@ -70,8 +70,6 @@ class GetInsuranceList extends MedidocMethod
 
         $insuranceListResponse = $this->handle($filters);
 
-        ray($insuranceListResponse);
-
         $command->table(
             array_keys(get_object_vars($insuranceListResponse->AddressList[0])),
             $insuranceListResponse->AddressList->map(fn (InsuranceData $insuranceData) => (array) $insuranceData)->toArray(),
