@@ -77,7 +77,7 @@ test('GetDocumentContent', function (string $DocumentGID) {
 
 test('CompleteDocument', function (string $DocumentGID) {
 
-    $response = CompleteDocument::run($DocumentGID, now());
+    $response = CompleteDocument::run($DocumentGID, now()->toImmutable());
 
     expect($response)
         ->toBeTrue();

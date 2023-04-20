@@ -2,7 +2,7 @@
 
 namespace Smartprax\Medidoc\Methods;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Smartprax\Medidoc\Entities\DocumentData;
 use Smartprax\Medidoc\Entities\SendDocumentResponse;
 use Smartprax\Medidoc\Enums\DocumentStatusEnum;
@@ -25,7 +25,7 @@ class SendDocument extends MedidocMethod
             DocumentGID: $sendDocumentResult->DocumentGID,
             DocumentID: $sendDocumentResult->DocumentID,
             DocumentWorkflowStatus: DocumentStatusEnum::from($sendDocumentResult->DocumentWorkflowStatus),
-            UploadDateTime: new Carbon($sendDocumentResult->UploadDateTime)
+            UploadDateTime: new CarbonImmutable($sendDocumentResult->UploadDateTime)
         );
     }
 }

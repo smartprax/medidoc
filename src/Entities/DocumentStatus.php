@@ -2,13 +2,13 @@
 
 namespace Smartprax\Medidoc\Entities;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Smartprax\Medidoc\Enums\DocumentStatusEnum;
 
 class DocumentStatus
 {
     public function __construct(
-        public readonly Carbon $StatusChangeDate,
+        public readonly CarbonImmutable $StatusChangeDate,
         public readonly DocumentStatusEnum $DocumentWorkflowStatus,
         public readonly string $AdditionalInformation,
     ) {

@@ -2,7 +2,7 @@
 
 namespace Smartprax\Medidoc\Methods;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Smartprax\Medidoc\Entities\DocumentStatesResponse;
 use Smartprax\Medidoc\Entities\DocumentStatus;
 use Smartprax\Medidoc\Enums\DocumentStatusEnum;
@@ -25,7 +25,7 @@ class GetDocumentStatesHistory extends MedidocMethod
             DocumentStatesList: \collect($response->DocumentStatesList->DocumentStatus)
                 ->map(
                     fn ($documenStatus) => new DocumentStatus(
-                        StatusChangeDate: new Carbon($documenStatus->StatusChangeDate),
+                        StatusChangeDate: new CarbonImmutable($documenStatus->StatusChangeDate),
                         DocumentWorkflowStatus: DocumentStatusEnum::from($documenStatus->DocumentWorkflowStatus),
                         AdditionalInformation: $documenStatus->AdditionalInformation
                     )

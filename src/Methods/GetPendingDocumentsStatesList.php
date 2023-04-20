@@ -2,7 +2,7 @@
 
 namespace Smartprax\Medidoc\Methods;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Smartprax\Medidoc\Entities\DocumentStatesResponse;
 use Smartprax\Medidoc\Entities\DocumentStatus;
 use Smartprax\Medidoc\Entities\PendingDocumentStatesResponse;
@@ -45,7 +45,7 @@ class GetPendingDocumentsStatesList extends MedidocMethod
                         AcknowledgmentToken: $documentStateResponse->AcknowledgmentToken,
                         DocumentStatesList: \collect($documentStateResponse->DocumentStatesList)->map(
                             fn (\stdClass $documentStatus) => new DocumentStatus(
-                                StatusChangeDate: new Carbon($documentStatus->StatusChangeDate),
+                                StatusChangeDate: new CarbonImmutable($documentStatus->StatusChangeDate),
                                 DocumentWorkflowStatus: DocumentStatusEnum::from($documentStatus->DocumentWorkflowStatus),
                                 AdditionalInformation: $documentStatus->AdditionalInformation,
                             )

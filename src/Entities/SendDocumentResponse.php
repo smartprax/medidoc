@@ -2,7 +2,6 @@
 
 namespace Smartprax\Medidoc\Entities;
 
-use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Smartprax\Medidoc\Enums\DocumentStatusEnum;
 
