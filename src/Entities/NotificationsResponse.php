@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Smartprax\Medidoc\Entities;
 
 use Illuminate\Support\Collection;

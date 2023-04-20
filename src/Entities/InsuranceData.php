@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Smartprax\Medidoc\Entities;
 
 class InsuranceData
@@ -21,7 +23,7 @@ class InsuranceData
         public readonly string $Email,
         public readonly string $Bsv,
         public readonly string $GlnDestination,
-        public readonly string $InsuranceType,
+        public readonly int $InsuranceType,
     ) {
     }
 }

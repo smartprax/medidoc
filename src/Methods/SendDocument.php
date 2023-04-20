@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Smartprax\Medidoc\Methods;
 
 use Carbon\CarbonImmutable;
@@ -23,7 +25,7 @@ class SendDocument extends MedidocMethod
         return new SendDocumentResponse(
             FolderGID: $sendDocumentResult->FolderGID,
             DocumentGID: $sendDocumentResult->DocumentGID,
-            DocumentID: $sendDocumentResult->DocumentID,
+            DocumentID: (int) $sendDocumentResult->DocumentID,
             DocumentWorkflowStatus: DocumentStatusEnum::from($sendDocumentResult->DocumentWorkflowStatus),
             UploadDateTime: new CarbonImmutable($sendDocumentResult->UploadDateTime)
         );

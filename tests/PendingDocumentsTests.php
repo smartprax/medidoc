@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Smartprax\Medidoc\Entities\DocumentStatesResponse;
 use Smartprax\Medidoc\Entities\PendingDocumentStatesResponse;
 use Smartprax\Medidoc\Methods\GetPendingDocumentsStatesList;

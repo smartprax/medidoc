@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Smartprax\Medidoc\Entities\NotificationInfo;
 use Smartprax\Medidoc\Entities\NotificationsResponse;
 use Smartprax\Medidoc\Methods\GetPendingNotifications;

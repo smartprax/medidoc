@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Smartprax\Medidoc\Methods;
 
 use Smartprax\Medidoc\Entities\ContentResponse;
@@ -13,10 +15,10 @@ class ConvertXmlToPdf extends MedidocMethod
 {
     public function handle(string $xmlContent, ContentFormatEnum $contentFormat, bool $isPatientCopy): ContentResponse
     {
-        $response =  Medidoc::call($this, [
+        $response = Medidoc::call($this, [
             'xmlContent' => $xmlContent,
             'contentFormat' => $contentFormat->name,
-            'isPatientCopy' => $isPatientCopy
+            'isPatientCopy' => $isPatientCopy,
         ])->ConvertXmlToPdfResult;
 
         return new ContentResponse(

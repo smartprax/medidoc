@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Smartprax\Medidoc\Entities;
 
 use Smartprax\Medidoc\Enums\ContentFormatEnum;
@@ -10,7 +12,9 @@ class DocumentData
     public string $SenderGln;
 
     public string $Password;
+
     public readonly string $ContentFormat;
+
     public readonly string $Language;
 
     public function __construct(

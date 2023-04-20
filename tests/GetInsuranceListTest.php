@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Smartprax\Medidoc\Entities\ArrayOfNameValue;
 use Smartprax\Medidoc\Entities\InsuranceListResponse;
 use Smartprax\Medidoc\Entities\NameValue;

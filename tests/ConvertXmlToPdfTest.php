@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Smartprax\Medidoc\Entities\ContentResponse;
 use Smartprax\Medidoc\Enums\ContentFormatEnum;
 use Smartprax\Medidoc\Methods\ConvertXmlToPdf;

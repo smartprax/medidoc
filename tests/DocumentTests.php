@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Smartprax\Medidoc\Entities\ArrayOfDocumentData;
 use Smartprax\Medidoc\Entities\ArrayOfNameValue;
 use Smartprax\Medidoc\Entities\ContentResponse;
@@ -17,7 +19,6 @@ use Smartprax\Medidoc\Methods\GetDocumentContent;
 use Smartprax\Medidoc\Methods\GetDocumentStatesHistory;
 use Smartprax\Medidoc\Methods\SendDocument;
 use Smartprax\Medidoc\Methods\SendDocumentList;
-
 
 test('SendDocument', function () {
 
@@ -107,7 +108,7 @@ test('SendDocuments', function () {
             ReceiverPatient: new PatientData(
                 AhvNumber: '756123456789' . count($arrayOfDocumentData),
                 MobilePhoneNumber: '076111111' . count($arrayOfDocumentData),
-                Email: 'test-'  . count($arrayOfDocumentData) . '@bar.ch'
+                Email: 'test-' . count($arrayOfDocumentData) . '@bar.ch'
             ),
             OptionalParameters: new ArrayOfNameValue([
                 new NameValue('OnlyToTrustcenter', '0'),
