@@ -9,11 +9,11 @@ use Smartprax\Medidoc\Enums\ContentFormatEnum;
 use Smartprax\Medidoc\Facades\Medidoc;
 
 /**
- * @method ContentResponse run(string $medidocDocumentGID, bool $contentAsPdf)
+ * @method ContentResponse run(string $medidocDocumentGID, ?bool $contentAsPdf = false)
  */
 class GetDocumentContent extends MedidocMethod
 {
-    public function handle(string $medidocDocumentGID, bool $contentAsPdf): ContentResponse
+    public function handle(string $medidocDocumentGID, ?bool $contentAsPdf = false): ContentResponse
     {
         $response = Medidoc::call($this, \compact('medidocDocumentGID', 'contentAsPdf'))
             ->GetDocumentContentResult;
