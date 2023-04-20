@@ -1,6 +1,6 @@
 # Medidoc API Client Library for Laravel
 
-A Laravel package to use the [Medidoc API](http://api.medidoc.ch/introduction/how-to-use-medidoc/).
+A [Laravel](https://laravel.com/) package to use the [Medidoc API](http://api.medidoc.ch/introduction/how-to-use-medidoc/).
 
 You need an account to access the documentation and use the API.
 
