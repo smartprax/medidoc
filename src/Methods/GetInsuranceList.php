@@ -28,6 +28,8 @@ class GetInsuranceList extends MedidocMethod
             ->AddressList
             ->InsuranceData;
 
+        $insurances = \is_array($insurances) ? $insurances : [$insurances];
+
         return new InsuranceListResponse(
             AddressList: \collect($insurances)
                 ->map(
