@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Smartprax\Medidoc;
 
 use Smartprax\Medidoc\Methods\CheckConnection;
+use Smartprax\Medidoc\Methods\GetDocumentStatesHistory;
 use Smartprax\Medidoc\Methods\GetInsuranceList;
+use Smartprax\Medidoc\Methods\GetPendingDocumentsStatesList;
 use Smartprax\Medidoc\Methods\GetPersonOrOrganizationList;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -28,6 +30,8 @@ class MedidocServiceProvider extends PackageServiceProvider
                 CheckConnection::class,
                 GetInsuranceList::class,
                 GetPersonOrOrganizationList::class,
+                GetPendingDocumentsStatesList::class,
+                GetDocumentStatesHistory::class,
             ]);
     }
 }
