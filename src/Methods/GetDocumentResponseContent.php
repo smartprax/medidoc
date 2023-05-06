@@ -15,8 +15,9 @@ class GetDocumentResponseContent extends MedidocMethod
 {
     public function handle(string $medidocDocumentGID, ?bool $contentAsPdf = false): ContentResponse
     {
+
         $response = Medidoc::call($this, \compact('medidocDocumentGID', 'contentAsPdf'))
-            ->GetDocumentContentResult;
+            ->GetDocumentResponseContentResult;
 
         return new ContentResponse(
             FolderGID: $response->FolderGID,
