@@ -26,7 +26,7 @@ class GetInsuranceList extends MedidocMethod
         $insurances = Medidoc::call($this, \compact('filterParameters'))
             ->GetInsuranceListResult
             ->AddressList
-            ->InsuranceData;
+            ?->InsuranceData ?? [];
 
         $insurances = \is_array($insurances) ? $insurances : [$insurances];
 
@@ -60,7 +60,7 @@ class GetInsuranceList extends MedidocMethod
     {
         $filter_name = $command->choice(
             'Filter?',
-            ['GLN', 'Name', 'Street', 'Zip', 'City', 'Canton', 'InsuranceType'],
+            ['GLN', 'Organisation', 'Street', 'Zip', 'City', 'Canton', 'InsuranceType'],
             0,
         );
 
@@ -72,10 +72,14 @@ class GetInsuranceList extends MedidocMethod
 
         $insuranceListResponse = $this->handle($filters);
 
-        $command->table(
-            array_keys(get_object_vars($insuranceListResponse->AddressList[0])),
-            $insuranceListResponse->AddressList->map(fn (InsuranceData $insuranceData) => (array) $insuranceData)->toArray(),
-        );
+        if ($insuranceListResponse->AddressList->count()) {
+            $command->table(
+                array_keys(get_object_vars($insuranceListResponse->AddressList[0])),
+                $insuranceListResponse->AddressList->map(fn (InsuranceData $insuranceData) => (array) $insuranceData)->toArray(),
+            );
+        } else {
+            $command->info('No results.');
+        }
 
     }
 }
