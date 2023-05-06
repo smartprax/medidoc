@@ -43,6 +43,13 @@ class GetDocumentStatesHistory extends MedidocMethod
 
     public function asCommand(Command $command)
     {
-        ray($this->handle($command->argument('document_gid')));
+        $documentStatesResponse = $this->handle($command->argument('document_gid'));
+
+        $command->table(['Date', 'State', 'Additional Information'], $documentStatesResponse->DocumentStatesList->map(fn(DocumentStatus $documentStatus) => [
+            'Timestamp' => $documentStatus->StatusChangeDate->toDateTimeString(),
+            'State' => $documentStatus->DocumentWorkflowStatus->name,
+            'AdditionalInformation' => $documentStatus->AdditionalInformation,
+        ]));
+
     }
 }
