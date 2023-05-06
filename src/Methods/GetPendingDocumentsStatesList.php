@@ -38,6 +38,8 @@ class GetPendingDocumentsStatesList extends MedidocMethod
             };
         }
 
+        $documentStatesResponses = \is_array($documentStatesResponses) ?: [];
+
         return new PendingDocumentStatesResponse(
             DocumentStatesResponseList: \collect($documentStatesResponses)
                 ->map(
