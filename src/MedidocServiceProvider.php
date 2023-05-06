@@ -7,6 +7,7 @@ namespace Smartprax\Medidoc;
 use Smartprax\Medidoc\Methods\CheckConnection;
 use Smartprax\Medidoc\Methods\GetDocumentStatesHistory;
 use Smartprax\Medidoc\Methods\GetInsuranceList;
+use Smartprax\Medidoc\Methods\GetPatientDataByPatientIdentityDetails;
 use Smartprax\Medidoc\Methods\GetPendingDocumentsStatesList;
 use Smartprax\Medidoc\Methods\GetPersonOrOrganizationList;
 use Spatie\LaravelPackageTools\Package;
@@ -32,6 +33,7 @@ class MedidocServiceProvider extends PackageServiceProvider
                 GetPersonOrOrganizationList::class,
                 GetPendingDocumentsStatesList::class,
                 GetDocumentStatesHistory::class,
+                GetPatientDataByPatientIdentityDetails::class
             ]);
     }
 }

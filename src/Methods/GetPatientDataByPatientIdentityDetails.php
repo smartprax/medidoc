@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Smartprax\Medidoc\Methods;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Console\Command;
 use Smartprax\Medidoc\Entities\PatientFullData;
 use Smartprax\Medidoc\Facades\Medidoc;
 
@@ -21,7 +22,7 @@ class GetPatientDataByPatientIdentityDetails extends MedidocMethod
         CarbonImmutable $patientBirthday,
         string $patientGender,
         ?CarbonImmutable $treatmentDate = null,
-        ?int $zipCode = null
+        ?string $zipCode = null
     ): ?PatientFullData {
         $patientBirthday = $patientBirthday->toDateTimeLocalString();
         $treatmentDate = ($treatmentDate ?? now()->startOfDay())->toDateTimeLocalString();
@@ -30,8 +31,6 @@ class GetPatientDataByPatientIdentityDetails extends MedidocMethod
             $this,
             \compact('patientFirstname', 'patientLastname', 'patientBirthday', 'patientGender', 'treatmentDate', 'zipCode')
         )->GetPatientDataByPatientIdentityDetailsResult;
-
-        ray($patientData);
 
         if ($patientData->ReturnValue !== 0) {
             return null;
@@ -87,5 +86,32 @@ class GetPatientDataByPatientIdentityDetails extends MedidocMethod
             VvgProduct7: $patientData->VvgProduct7,
             VvgProduct8: $patientData->VvgProduct8,
         );
+    }
+
+    public function asCommand(Command $command): void
+    {
+        $patientFirstname = $command->ask('Firstname');
+        $patientLastname = $command->ask('Lastname');
+        $patientBirthday = $command->ask('Birthday');
+        $patientGender = $command->choice('Gender', ['male', 'female']);
+        $zipCode = $command->ask('Zip');
+
+        ray(new CarbonImmutable($patientBirthday));
+
+        $patientFullData = $this->handle(
+            patientFirstname: $patientFirstname,
+            patientLastname: $patientLastname,
+            patientBirthday: new CarbonImmutable($patientBirthday),
+            patientGender: $patientGender,
+            zipCode: $zipCode
+        );
+
+        if ($patientFullData) {
+
+            ray($patientFullData);
+
+        } else {
+            $command->info('No results.');
+        }
     }
 }
