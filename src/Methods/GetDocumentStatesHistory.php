@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Smartprax\Medidoc\Methods;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Console\Command;
 use Smartprax\Medidoc\Entities\DocumentStatesResponse;
 use Smartprax\Medidoc\Entities\DocumentStatus;
 use Smartprax\Medidoc\Enums\DocumentStatusEnum;
@@ -24,7 +25,7 @@ class GetDocumentStatesHistory extends MedidocMethod
             FolderGID: $response->FolderGID,
             DocumentGID: $response->DocumentGID,
             AcknowledgmentToken: $response->AcknowledgmentToken,
-            DocumentStatesList: \collect($response->DocumentStatesList->DocumentStatus)
+            DocumentStatesList: \collect($response->DocumentStatesList)
                 ->map(
                     fn ($documenStatus) => new DocumentStatus(
                         StatusChangeDate: new CarbonImmutable($documenStatus->StatusChangeDate),
@@ -33,5 +34,15 @@ class GetDocumentStatesHistory extends MedidocMethod
                     )
                 )
         );
+    }
+
+    public function getCommandSignature(): string
+    {
+        return parent::getCommandSignature()  . ' {document_gid}';
+    }
+
+    public function asCommand(Command $command)
+    {
+        ray($this->handle($command->argument('document_gid')));
     }
 }
