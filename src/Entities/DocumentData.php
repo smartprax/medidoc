@@ -20,7 +20,7 @@ class DocumentData
     public function __construct(
         public string $FileContent,
 
-        public readonly ?string $ReceiverGln = null,
+        public readonly ?string $ReceiverGln = null, // Leave empty for process "Dokumente an Patienten/Kostenträger senden" a.k.a invoices!
         public readonly ?string $InvoiceID = null,
         public readonly ?PatientData $ReceiverPatient = null,
         public readonly ?ArrayOfNameValue $OptionalParameters = null,
