@@ -7,7 +7,7 @@ namespace Smartprax\Medidoc\Methods;
 use Smartprax\Medidoc\Facades\Medidoc;
 
 /**
- * @method bool run(string $medidocDocumentGID)
+ * @method static bool run(string $medidocDocumentGID)
  */
 class CancelDocument extends MedidocMethod
 {

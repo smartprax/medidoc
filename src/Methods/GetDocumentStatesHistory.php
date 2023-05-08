@@ -12,7 +12,7 @@ use Smartprax\Medidoc\Enums\DocumentStatusEnum;
 use Smartprax\Medidoc\Facades\Medidoc;
 
 /**
- * @method DocumentStatesResponse run(string $medidocDocumentGID)
+ * @method static DocumentStatesResponse run(string $medidocDocumentGID)
  */
 class GetDocumentStatesHistory extends MedidocMethod
 {

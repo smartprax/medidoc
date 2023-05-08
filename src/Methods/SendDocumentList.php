@@ -11,6 +11,9 @@ use Smartprax\Medidoc\Entities\SendDocumentResponse;
 use Smartprax\Medidoc\Enums\DocumentStatusEnum;
 use Smartprax\Medidoc\Facades\Medidoc;
 
+/**
+ * @method static DocumentListResponse run(ArrayOfDocumentData $documentDataList)
+ */
 class SendDocumentList extends MedidocMethod
 {
     public function handle(ArrayOfDocumentData $documentDataList): DocumentListResponse

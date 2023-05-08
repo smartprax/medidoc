@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Smartprax\Medidoc;
 
 use Smartprax\Medidoc\Methods\CheckConnection;
+use Smartprax\Medidoc\Methods\GetDocumentContent;
 use Smartprax\Medidoc\Methods\GetDocumentStatesHistory;
 use Smartprax\Medidoc\Methods\GetInsuranceList;
 use Smartprax\Medidoc\Methods\GetPatientDataByPatientIdentityDetails;
@@ -33,7 +34,8 @@ class MedidocServiceProvider extends PackageServiceProvider
                 GetPersonOrOrganizationList::class,
                 GetPendingDocumentsStatesList::class,
                 GetDocumentStatesHistory::class,
-                GetPatientDataByPatientIdentityDetails::class
+                GetPatientDataByPatientIdentityDetails::class,
+                GetDocumentContent::class,
             ]);
     }
 }

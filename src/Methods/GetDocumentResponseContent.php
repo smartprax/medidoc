@@ -9,7 +9,7 @@ use Smartprax\Medidoc\Enums\ContentFormatEnum;
 use Smartprax\Medidoc\Facades\Medidoc;
 
 /**
- * @method ContentResponse run(string $medidocDocumentGID, ?bool $contentAsPdf = false)
+ * @method static ContentResponse run(string $medidocDocumentGID, ?bool $contentAsPdf = false)
  */
 class GetDocumentResponseContent extends MedidocMethod
 {

@@ -16,7 +16,7 @@ use Smartprax\Medidoc\MedidocException;
 /**
  * @see http://api.medidoc.ch/methods/getpendingdocumentsstateslist/
  *
- * @method PendingDocumentStatesResponse run()
+ * @method static PendingDocumentStatesResponse run()
  */
 class GetPendingNotifications extends MedidocMethod
 {

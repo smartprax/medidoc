@@ -50,6 +50,8 @@ class Medidoc
 
             $status = ReturnStatusEnum::from((int) $returnStatus[0]);
 
+            ray()->xml($this->client->__getLastResponse());
+
             throw new MedidocException($status->name, $status->value);
         }
 

@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 use Smartprax\Medidoc\Facades\Medidoc;
 
 /**
- * @method int run()
+ * @method static int run()
  */
 class CheckConnection extends MedidocMethod
 {

@@ -13,7 +13,7 @@ use Smartprax\Medidoc\Facades\Medidoc;
 /**
  * @see http://api.medidoc.ch/methods/senddocument/
  *
- * @method SendDocumentResponse run(DocumentData $documentData)
+ * @method static SendDocumentResponse run(DocumentData $documentData)
  */
 class SendDocument extends MedidocMethod
 {

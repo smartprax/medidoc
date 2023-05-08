@@ -9,7 +9,7 @@ use Smartprax\Medidoc\Facades\Medidoc;
 /**
  * @see http://api.medidoc.ch/methods/senddocumentstatesacknowledgement/
  *
- * @method bool run(string $token)
+ * @method static bool run(string $token)
  */
 class SendDocumentStatesAcknowledgement extends MedidocMethod
 {

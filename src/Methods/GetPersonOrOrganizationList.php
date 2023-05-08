@@ -16,7 +16,7 @@ use Smartprax\Medidoc\Facades\Medidoc;
 /**
  * @see http://api.medidoc.ch/methods/getpersonororganizationlist/
  *
- * @method PersonOrOrganizationListResponse run(ArrayOfNameValue $filterParameters)
+ * @method static PersonOrOrganizationListResponse run(ArrayOfNameValue $filterParameters)
  */
 class GetPersonOrOrganizationList extends MedidocMethod
 {

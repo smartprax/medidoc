@@ -12,7 +12,7 @@ use Smartprax\Medidoc\Facades\Medidoc;
 /**
  * @see http://api.medidoc.ch/methods/getpatientdatabypatientidentitydetails
  *
- * @method PatientFullData|null run(string $patientFirstname, string $patientLastname, CarbonImmutable $patientBirthday, string $patientGender, ?CarbonImmutable $treatmentDate = null, string $zipCode = null)
+ * @method static PatientFullData|null run(string $patientFirstname, string $patientLastname, CarbonImmutable $patientBirthday, string $patientGender, ?CarbonImmutable $treatmentDate = null, string $zipCode = null)
  */
 class GetPatientDataByPatientIdentityDetails extends MedidocMethod
 {

@@ -8,7 +8,7 @@ use Carbon\CarbonImmutable;
 use Smartprax\Medidoc\Facades\Medidoc;
 
 /**
- * @method bool run(string $medidocDocumentGID, CarbonImmutable $completeDate)
+ * @method static bool run(string $medidocDocumentGID, CarbonImmutable $completeDate)
  */
 class CompleteDocument extends MedidocMethod
 {

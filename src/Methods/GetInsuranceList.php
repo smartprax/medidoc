@@ -15,7 +15,7 @@ use Smartprax\Medidoc\Facades\Medidoc;
 /**
  * See http://api.medidoc.ch/methods/getinsurancelist/ for filter specs.
  *
- * @method InsuranceListResponse run(ArrayOfNameValue $filterParameters)
+ * @method static InsuranceListResponse run(ArrayOfNameValue $filterParameters)
  */
 class GetInsuranceList extends MedidocMethod
 {
