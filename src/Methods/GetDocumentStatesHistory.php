@@ -21,11 +21,13 @@ class GetDocumentStatesHistory extends MedidocMethod
         $response = Medidoc::call($this, compact('medidocDocumentGID'))
             ->GetDocumentStatesHistoryResult;
 
+        ray($response);
+
         return new DocumentStatesResponse(
             FolderGID: $response->FolderGID,
             DocumentGID: $response->DocumentGID,
             AcknowledgmentToken: $response->AcknowledgmentToken,
-            DocumentStatesList: \collect($response->DocumentStatesList)
+            DocumentStatesList: \collect(\is_array($response->DocumentStatesList->DocumentStatus) ? $response->DocumentStatesList->DocumentStatus : [$response->DocumentStatesList->DocumentStatus])
                 ->map(
                     fn ($documenStatus) => new DocumentStatus(
                         StatusChangeDate: new CarbonImmutable($documenStatus->StatusChangeDate),
