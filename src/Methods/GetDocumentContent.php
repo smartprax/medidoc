@@ -35,9 +35,11 @@ class GetDocumentContent extends MedidocMethod
     public function asCommand(Command $command)
     {
 
-        $response = $this->handle($command->argument('medidocDocumentGID'), \boolval($command->option('contentAsPdf')));
+        $contentAsPdf = filter_var($command->option('contentAsPdf'), FILTER_VALIDATE_BOOLEAN);
 
-        if (\boolval($command->option('contentAsPdf'))) {
+        $response = $this->handle($command->argument('medidocDocumentGID'), $contentAsPdf);
+
+        if ($contentAsPdf) {
 
             $command->info('Operation successful.');
 
