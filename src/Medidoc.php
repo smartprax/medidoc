@@ -27,7 +27,7 @@ class Medidoc
     }
 
     /**
-     * @throws MedidocException
+     * @throws MedidocReturnStatusException
      * @throws \Exception
      */
     public function call(Methods\MedidocMethod $request, array $parameters): stdClass
@@ -50,9 +50,7 @@ class Medidoc
 
             $status = ReturnStatusEnum::from((int) $returnStatus[0]);
 
-            ray()->xml($this->client->__getLastResponse());
-
-            throw new MedidocException($status->name, $status->value);
+            throw new MedidocReturnStatusException($status);
         }
 
         return $response;

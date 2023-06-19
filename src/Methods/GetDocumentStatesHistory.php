@@ -21,8 +21,6 @@ class GetDocumentStatesHistory extends MedidocMethod
         $response = Medidoc::call($this, compact('medidocDocumentGID'))
             ->GetDocumentStatesHistoryResult;
 
-        ray($response);
-
         return new DocumentStatesResponse(
             FolderGID: $response->FolderGID,
             DocumentGID: $response->DocumentGID,

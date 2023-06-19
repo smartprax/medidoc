@@ -10,27 +10,19 @@ use Smartprax\Medidoc\Entities\PatientFullData;
 use Smartprax\Medidoc\Facades\Medidoc;
 
 /**
- * @see http://api.medidoc.ch/methods/getpatientdatabypatientidentitydetails
+ * @see http://api.medidoc.ch/methods/getpatientdatabyinsurancecardnumber
  *
- * @method static PatientFullData|null run(string $patientFirstname, string $patientLastname, CarbonImmutable $patientBirthday, string $patientGender, ?CarbonImmutable $treatmentDate = null, string $zipCode = null)
+ * @method static PatientFullData|null run(string $insuranceCardNumber)
  */
-class GetPatientDataByPatientIdentityDetails extends MedidocMethod
+class GetPatientDataByInsuranceCardNumber extends MedidocMethod
 {
     public function handle(
-        string $patientFirstname,
-        string $patientLastname,
-        CarbonImmutable $patientBirthday,
-        string $patientGender,
-        ?CarbonImmutable $treatmentDate = null,
-        ?string $zipCode = null
+        string $insuranceCardNumber,
     ): ?PatientFullData {
-        $patientBirthday = $patientBirthday->toDateTimeLocalString();
-        $treatmentDate = ($treatmentDate ?? now()->startOfDay())->toDateTimeLocalString();
-
         $patientData = Medidoc::call(
             $this,
-            \compact('patientFirstname', 'patientLastname', 'patientBirthday', 'patientGender', 'treatmentDate', 'zipCode')
-        )->GetPatientDataByPatientIdentityDetailsResult;
+            \compact('insuranceCardNumber')
+        )->GetPatientDataByInsuranceCardNumberResult;
 
         if ($patientData->ReturnValue !== 0) {
             return null;
@@ -90,24 +82,14 @@ class GetPatientDataByPatientIdentityDetails extends MedidocMethod
 
     public function asCommand(Command $command): void
     {
-        $patientFirstname = $command->ask('Firstname');
-        $patientLastname = $command->ask('Lastname');
-        $patientBirthday = $command->ask('Birthday');
-        $patientGender = $command->choice('Gender', ['male', 'female']);
-        $zipCode = $command->ask('Zip');
+        $insuranceCardNumber = $command->ask('Insurance card number');
 
         $patientFullData = $this->handle(
-            patientFirstname: $patientFirstname,
-            patientLastname: $patientLastname,
-            patientBirthday: new CarbonImmutable($patientBirthday),
-            patientGender: $patientGender,
-            zipCode: $zipCode
+            insuranceCardNumber: $insuranceCardNumber
         );
 
         if ($patientFullData) {
-
             ray($patientFullData);
-
         } else {
             $command->info('No results.');
         }

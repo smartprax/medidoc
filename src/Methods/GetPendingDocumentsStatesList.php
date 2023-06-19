@@ -13,7 +13,7 @@ use Smartprax\Medidoc\Entities\PendingDocumentStatesResponse;
 use Smartprax\Medidoc\Enums\DocumentStatusEnum;
 use Smartprax\Medidoc\Enums\ReturnStatusEnum;
 use Smartprax\Medidoc\Facades\Medidoc;
-use Smartprax\Medidoc\MedidocException;
+use Smartprax\Medidoc\MedidocReturnStatusException;
 
 /**
  * @see http://api.medidoc.ch/methods/getpendingdocumentsstateslist/
@@ -24,16 +24,13 @@ class GetPendingDocumentsStatesList extends MedidocMethod
 {
     public function handle(): PendingDocumentStatesResponse
     {
-
         try {
-
             $documentStatesResponses = Medidoc::call($this, [])
                 ->GetPendingDocumentsStatesListResult
                 ->DocumentStatesResponseList
                 ->DocumentStatesResponse ?? [];
 
-        } catch (MedidocException $e) {
-
+        } catch (MedidocReturnStatusException $e) {
             match ($e->getCode()) {
                 ReturnStatusEnum::NoPendingDocumentFound->value => $documentStatesResponses = [],
                 default => throw $e
@@ -63,7 +60,7 @@ class GetPendingDocumentsStatesList extends MedidocMethod
     }
 
     /**
-     * @throws MedidocException
+     * @throws MedidocReturnStatusException
      */
     public function asCommand(Command $command)
     {

@@ -11,7 +11,7 @@ use Smartprax\Medidoc\Entities\NotificationsResponse;
 use Smartprax\Medidoc\Entities\PendingDocumentStatesResponse;
 use Smartprax\Medidoc\Enums\ReturnStatusEnum;
 use Smartprax\Medidoc\Facades\Medidoc;
-use Smartprax\Medidoc\MedidocException;
+use Smartprax\Medidoc\MedidocReturnStatusException;
 
 /**
  * @see http://api.medidoc.ch/methods/getpendingdocumentsstateslist/
@@ -28,7 +28,7 @@ class GetPendingNotifications extends MedidocMethod
                 ->GetPendingNotificationsResult
                 ->Notifications;
 
-        } catch (MedidocException $e) {
+        } catch (MedidocReturnStatusException $e) {
 
             match ($e->getCode()) {
                 ReturnStatusEnum::NoPendingDocumentFound->value => $notifications = [],
