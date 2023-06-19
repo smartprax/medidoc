@@ -22,6 +22,9 @@ use Smartprax\Medidoc\MedidocReturnStatusException;
  */
 class GetPendingDocumentsStatesList extends MedidocMethod
 {
+    /**
+     * @throws MedidocReturnStatusException
+     */
     public function handle(): PendingDocumentStatesResponse
     {
         try {
