@@ -12,7 +12,7 @@
     {
       "name": "Rico Leuthold",
       "email": "info@smartprax.ch",
-      "role": "Nothing & All"
+      "role": "All & Nothing"
     }
   ],
   "require": {
@@ -67,6 +67,6 @@
       }
     }
   },
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "prefer-stable": true
 }
