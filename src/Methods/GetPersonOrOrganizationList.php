@@ -22,10 +22,22 @@ class GetPersonOrOrganizationList extends MedidocMethod
 {
     public function handle(ArrayOfNameValue $filterParameters): PersonOrOrganizationListResponse
     {
-        $personsOrOrganizations = Medidoc::call($this, compact('filterParameters'))
+        $addressList = Medidoc::call($this, compact('filterParameters'))
             ->GetPersonOrOrganizationListResult
-            ->AddressList
-            ->PersonOrOrganization;
+            ->AddressList;
+
+        $personsOrOrganizations = [];
+
+        if (isset($addressList->PersonOrOrganization)) {
+
+            $personsOrOrganizations = $addressList->PersonOrOrganization;
+
+            if (! \is_array($personsOrOrganizations)) {
+                $personsOrOrganizations = [$personsOrOrganizations];
+            }
+        }
+
+        ray($personsOrOrganizations);
 
         return new PersonOrOrganizationListResponse(AddressList: \collect($personsOrOrganizations)
             ->map(

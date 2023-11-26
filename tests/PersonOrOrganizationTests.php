@@ -18,11 +18,22 @@ test('Get By Canton Filter', function () {
     expect($response)->toBeInstanceOf(PersonOrOrganizationListResponse::class);
 });
 
-test('Get By OrgRole Doctor ', function () {
+test('Get By OrgRole Doctor', function () {
 
     $response = GetPersonOrOrganizationList::run(
         new ArrayOfNameValue([
             new NameValue('OrgRole', '110'),
+        ])
+    );
+
+    expect($response)->toBeInstanceOf(PersonOrOrganizationListResponse::class);
+});
+
+test('Get By GLN Filter', function () {
+
+    $response = GetPersonOrOrganizationList::run(
+        new ArrayOfNameValue([
+            new NameValue('GLN', '7601003926996'),
         ])
     );
 
