@@ -23,6 +23,13 @@ class Medidoc
                 'exceptions' => true,
                 'soap_version' => \SOAP_1_2,
                 'trace' => true,
+                'stream_context' => stream_context_create([
+                    'ssl' => [
+                        'verify_peer' => false,
+                        'verify_peer_name' => true,
+                        'allow_self_signed' => true
+                    ]
+                ]),
             ]);
     }
 
