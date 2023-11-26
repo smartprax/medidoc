@@ -37,8 +37,6 @@ class GetPersonOrOrganizationList extends MedidocMethod
             }
         }
 
-        ray($personsOrOrganizations);
-
         return new PersonOrOrganizationListResponse(AddressList: \collect($personsOrOrganizations)
             ->map(
                 fn ($personOrOrganization) => new PersonOrOrganization(

@@ -68,15 +68,7 @@ class GetPatientDataByInsuranceCardNumber extends MedidocMethod
             HospitalAkutSomatik: $patientData->HospitalAkutSomatik,
             HospitalPsychiatry: $patientData->HospitalPsychiatry,
             HospitalList: $patientData->HospitalList,
-            HospitalBenefitDelay: $patientData->HospitalBenefitDelay,
-            VvgProduct1: $patientData->VvgProduct1,
-            VvgProduct2: $patientData->VvgProduct2,
-            VvgProduct3: $patientData->VvgProduct3,
-            VvgProduct4: $patientData->VvgProduct4,
-            VvgProduct5: $patientData->VvgProduct5,
-            VvgProduct6: $patientData->VvgProduct6,
-            VvgProduct7: $patientData->VvgProduct7,
-            VvgProduct8: $patientData->VvgProduct8,
+            HospitalBenefitDelay: $patientData->HospitalBenefitDelay
         );
     }
 
@@ -89,7 +81,7 @@ class GetPatientDataByInsuranceCardNumber extends MedidocMethod
         );
 
         if ($patientFullData) {
-            ray($patientFullData);
+            $command->info('Insurance GLN: ' . $patientFullData->InsuranceGLN);
         } else {
             $command->info('No results.');
         }

@@ -12,17 +12,17 @@ use Smartprax\Medidoc\Facades\Medidoc;
 /**
  * @see http://api.medidoc.ch/methods/getpatientdatabypatientidentitydetails
  *
- * @method static PatientFullData|null run(string $patientFirstname, string $patientLastname, CarbonImmutable $patientBirthday, string $patientGender, ?CarbonImmutable $treatmentDate = null, string $zipCode = null)
+ * @method static PatientFullData|null run(string $patientGender, string $patientFirstname, string $patientLastname, CarbonImmutable $patientBirthday, string $zipCode = null, ?CarbonImmutable $treatmentDate = null)
  */
 class GetPatientDataByPatientIdentityDetails extends MedidocMethod
 {
     public function handle(
+        string $patientGender,
         string $patientFirstname,
         string $patientLastname,
         CarbonImmutable $patientBirthday,
-        string $patientGender,
+        ?string $zipCode = null,
         ?CarbonImmutable $treatmentDate = null,
-        ?string $zipCode = null
     ): ?PatientFullData {
         $patientBirthday = $patientBirthday->toDateTimeLocalString();
         $treatmentDate = ($treatmentDate ?? now()->startOfDay())->toDateTimeLocalString();
@@ -49,7 +49,7 @@ class GetPatientDataByPatientIdentityDetails extends MedidocMethod
             Language: $patientData->Language,
             Firstname: $patientData->Firstname,
             Lastname: $patientData->Lastname,
-            Birthdate: $patientData->Birthdate,
+            Birthdate: new CarbonImmutable($patientData->Birthdate),
             Gender: $patientData->Gender,
             Street: $patientData->Street,
             Pobox: $patientData->Pobox,
@@ -76,15 +76,7 @@ class GetPatientDataByPatientIdentityDetails extends MedidocMethod
             HospitalAkutSomatik: $patientData->HospitalAkutSomatik,
             HospitalPsychiatry: $patientData->HospitalPsychiatry,
             HospitalList: $patientData->HospitalList,
-            HospitalBenefitDelay: $patientData->HospitalBenefitDelay,
-            VvgProduct1: $patientData->VvgProduct1,
-            VvgProduct2: $patientData->VvgProduct2,
-            VvgProduct3: $patientData->VvgProduct3,
-            VvgProduct4: $patientData->VvgProduct4,
-            VvgProduct5: $patientData->VvgProduct5,
-            VvgProduct6: $patientData->VvgProduct6,
-            VvgProduct7: $patientData->VvgProduct7,
-            VvgProduct8: $patientData->VvgProduct8,
+            HospitalBenefitDelay: $patientData->HospitalBenefitDelay
         );
     }
 
@@ -97,17 +89,15 @@ class GetPatientDataByPatientIdentityDetails extends MedidocMethod
         $zipCode = $command->ask('Zip');
 
         $patientFullData = $this->handle(
+            patientGender: $patientGender,
             patientFirstname: $patientFirstname,
             patientLastname: $patientLastname,
             patientBirthday: new CarbonImmutable($patientBirthday),
-            patientGender: $patientGender,
             zipCode: $zipCode
         );
 
         if ($patientFullData) {
-
-            ray($patientFullData);
-
+            $command->info('Insurance GLN: ' . $patientFullData->InsuranceGLN);
         } else {
             $command->info('No results.');
         }

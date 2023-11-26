@@ -48,15 +48,7 @@ class PatientFullData
         public readonly string $HospitalAkutSomatik,
         public readonly string $HospitalPsychiatry,
         public readonly string $HospitalList,
-        public readonly bool $HospitalBenefitDelay,
-        public readonly string $VvgProduct1,
-        public readonly string $VvgProduct2,
-        public readonly string $VvgProduct3,
-        public readonly string $VvgProduct4,
-        public readonly string $VvgProduct5,
-        public readonly string $VvgProduct6,
-        public readonly string $VvgProduct7,
-        public readonly string $VvgProduct8,
+        public readonly bool $HospitalBenefitDelay
     ) {
     }
 }
