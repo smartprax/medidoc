@@ -15,6 +15,7 @@ enum DocumentStatusEnum: int
     case TGForwarded = 11;
     case TGForwardedWithResponse = 12;
     case PrintServiceRequested = 13;
+    case InvoiceMarkedAsPayed = 16;
     case InvoicePaidByESR = 17;
     case InvoicePaidByPatient = 18;
     case InvoicePaidByInsurance = 19;
