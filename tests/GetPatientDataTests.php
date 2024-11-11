@@ -11,13 +11,11 @@ use Smartprax\Medidoc\Methods\GetPatientDataByPatientIdentityDetails;
 
 test('Get PatientData by Firstname, Lastname & Birthday', function () {
 
-    ray(\config());
-
     $response = GetPatientDataByPatientIdentityDetails::run(
         patientGender: 'male',
-        patientFirstname: 'Rico',
-        patientLastname: 'Leuthold',
-        patientBirthday: new CarbonImmutable('1977-06-10'),
+        patientFirstname: 'Foo',
+        patientLastname: 'Bar',
+        patientBirthday: new CarbonImmutable('1999-01-01'),
     );
 
     expect($response)
