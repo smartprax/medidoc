@@ -18,6 +18,7 @@ enum ContentFormatEnum: int
     case XmlNotificationV451 = 9;
     case XmlCreditV450 = 10;
     case XmlFormV450 = 11;
+    case XmlFormV500 = 16;
     case Doc = 110;
     case Docx = 111;
     case Xls = 120;
